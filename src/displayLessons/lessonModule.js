@@ -1,16 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const lessonModule = (props) => {
+const LessonModule = (props) => {
     const {
         title, thumbnailURL,
     } = props;
 
     return (
         <div className='lessonModule'>
-            <img className='thumbnail' src={thumbnailURL} />
+            <img className='thumbnail' src={thumbnailURL} alt='no thumbnail'/>
             <div>{title}</div>
         </div>
     );
 }
 
-export default lessonModule;
+LessonModule.propTypes = {
+    title: PropTypes.string.isRequired,
+    thumbnailURL: PropTypes.string.isRequired,
+};
+
+export default LessonModule;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
-import displayLessons from './displayLessons/displayLessons'
+import DisplayLessons from './displayLessons/displayLessons'
 const temp = () => <div>hello world</div>;
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <Switch>
       <Route exact path="/" component={temp} />
       <Route exact path="/route" component={temp} />
-      <Route exact path = "/displayLessons" component={displayLessons} />
+      <Route exact path = "/displayLessons" component={DisplayLessons} />
       {/* add more routes here */}
     </Switch>
   </Router>

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import lessonModule from './lessonModule'
+import LessonModule from './lessonModule'
 import axios from 'axios';
 
-function displayLessons() {
+const DisplayLessons = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [lessons, setLessons] = useState(JSON.parse(localStorage.getItem('lessons')) || []);
 
     const getLessons = async () => {
-        const res = await axios.get('localhost:8000/');
+        const res = await axios.get('localhost:8000/lessons', { withCredentials: true });
         localStorage.setItem('lessons', JSON.stringify(res.data));
         setLessons(res.data);
         setIsLoading(false);
@@ -18,9 +18,9 @@ function displayLessons() {
             getLessons();
         } else {
             setIsLoading(false);
-            const res = axios.get('localhost:8000/');
+            const res = axios.get('localhost:8000/lessons', { withCredentials: true });
             if (res.data !== lessons) {
-                getLessons()
+                getLessons();
             }
         }
         return () => (true);
@@ -28,7 +28,7 @@ function displayLessons() {
 
     const lessonList = () => lessons.map(
         (temp) => (
-            <lessonModule
+            <LessonModule
               title={temp.title}
               thumbnailURL={temp.thumbnailURL}
             />
@@ -45,4 +45,4 @@ function displayLessons() {
 };
 
 
-export default displayLessons;
+export default DisplayLessons;
