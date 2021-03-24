@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import LessonModule from './lessonModule'
 import axios from 'axios';
 
@@ -7,7 +7,7 @@ const DisplayLessons = () => {
     const [lessons, setLessons] = useState(JSON.parse(localStorage.getItem('lessons')) || []);
 
     const getLessons = async () => {
-        const res = await axios.get('localhost:8000/lessons', { withCredentials: true });
+        const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
         localStorage.setItem('lessons', JSON.stringify(res.data));
         setLessons(res.data);
         setIsLoading(false);
@@ -18,7 +18,7 @@ const DisplayLessons = () => {
             getLessons();
         } else {
             setIsLoading(false);
-            const res = axios.get('localhost:8000/lessons', { withCredentials: true });
+            const res = axios.get('http://localhost:8000/lessons', { withCredentials: true });
             if (res.data !== lessons) {
                 getLessons();
             }
@@ -26,14 +26,14 @@ const DisplayLessons = () => {
         return () => (true);
     }, [lessons]);
 
-    const lessonList = () => lessons.map(
+    const lessonList = useMemo(() => lessons.map(
         (temp) => (
             <LessonModule
               title={temp.title}
               thumbnailURL={temp.thumbnailURL}
             />
         )
-    );
+    ), [lessons]);
 
     return (
         <div>
