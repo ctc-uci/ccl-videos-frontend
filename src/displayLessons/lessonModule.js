@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './lessonModule.css';
 
-const LessonModule = (props) => {
-    const {
-        title, thumbnailURL,
-    } = props;
+const LessonModule = ({ title, thumbnailUrl }) => {
 
     return (
         <div className='lessonModule'>
-            <img className='thumbnail' src={thumbnailURL} alt='no thumbnail'/>
+            <p>{thumbnailUrl}</p>
+            <img className='thumbnail' src={thumbnailUrl} alt='no thumbnail'/>
             <div>{title}</div>
+            <button className={"editButton"}>Edit</button>
+            <button className={"newCodeButton"}>New Code</button>
         </div>
     );
 }

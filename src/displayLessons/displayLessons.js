@@ -4,11 +4,11 @@ import axios from 'axios';
 
 const DisplayLessons = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [lessons, setLessons] = useState(JSON.parse(localStorage.getItem('lessons')) || []);
+    const [lessons, setLessons] = useState([]);
 
     const getLessons = async () => {
         const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
-        localStorage.setItem('lessons', JSON.stringify(res.data));
+        console.log(res);
         setLessons(res.data);
         setIsLoading(false);
     };
@@ -18,19 +18,21 @@ const DisplayLessons = () => {
             getLessons();
         } else {
             setIsLoading(false);
-            const res = axios.get('http://localhost:8000/lessons', { withCredentials: true });
-            if (res.data !== lessons) {
-                getLessons();
-            }
+            (async () => {
+                const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
+                if (res.data !== lessons) {
+                    getLessons();
+                }
+            })();
         }
         return () => (true);
-    }, [lessons]);
+    }, []);
 
     const lessonList = useMemo(() => lessons.map(
-        (temp) => (
+        (lesson) => (
             <LessonModule
-              title={temp.title}
-              thumbnailURL={temp.thumbnailURL}
+              title={lesson.title}
+              thumbnailURL={lesson.thumbnailUrl}
             />
         )
     ), [lessons]);

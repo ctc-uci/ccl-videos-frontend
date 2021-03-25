@@ -1,0 +1,12 @@
+.lessonModule {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 10px;
+}
+
+.thumbnail {
+    width: 100px;
+    height: 50px;
+}
