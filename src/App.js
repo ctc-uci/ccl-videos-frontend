@@ -2,9 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
+import UploadVideo from "./Component/UploadVideo";
 
 const temp = () => <div>hello world</div>;
-
+//const uploadVideo = () => 
 function App() {
   return (
     <Router>
@@ -29,6 +30,7 @@ function App() {
             />
           )}
         />
+        <Route exact path = "/upload" component={UploadVideo} />
         {/* add more routes here */}
       </Switch>
     </Router>
