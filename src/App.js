@@ -5,7 +5,7 @@ import ModifyLesson from "./Component/ModifyLesson";
 import UploadVideo from "./Component/UploadVideo";
 
 const temp = () => <div>hello world</div>;
-//const uploadVideo = () => 
+
 function App() {
   return (
     <Router>
