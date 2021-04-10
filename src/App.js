@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
+import AdminLogin from './Component/AdminLogin'
 
 const temp = () => <div>hello world</div>;
 
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={temp} />
         <Route exact path="/route" component={temp} />
+        <Route exact path="/adminLogin" component={AdminLogin} />
         <Route
           exact
           path="/lessons"
