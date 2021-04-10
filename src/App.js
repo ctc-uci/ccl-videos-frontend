@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
 import AdminLogin from './Component/AdminLogin'
-
+import { Alert } from 'shards-react';
 const temp = () => <div>hello world</div>;
 
 function App() {
   return (
     <Router>
+      <Alert />
       <Switch>
         <Route exact path="/" component={temp} />
         <Route exact path="/route" component={temp} />
