@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
 import AdminLogin from './Component/AdminLogin'
+import ProtectedRoute from './Component/routes/ProtectedRoute'
 import { Alert } from 'shards-react';
 const temp = () => <div>hello world</div>;
 
@@ -14,7 +15,7 @@ function App() {
         <Route exact path="/" component={temp} />
         <Route exact path="/route" component={temp} />
         <Route exact path="/adminLogin" component={AdminLogin} />
-        <Route
+        <ProtectedRoute
           exact
           path="/lessons"
           render={() => (
