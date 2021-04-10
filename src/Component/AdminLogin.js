@@ -12,7 +12,7 @@ const AdminLogin = () => {
         const loginResponse = await axios.post('http://localhost:8000/auth/login', {
             username,
             password,
-        })
+        }, {withCredentials: true})
     if(loginResponse.status === 200){
         history.push('/lessons')
     }
