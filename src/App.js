@@ -33,7 +33,7 @@ function App() {
             />
           )}
         />
-        {/* add more routes here */}
+        { /* add more routes here */ }
       </Switch>
     </Router>
   );
