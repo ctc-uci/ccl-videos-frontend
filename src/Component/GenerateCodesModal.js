@@ -19,7 +19,7 @@ import config from '../config';
 import { DURATION_UNITS } from '../consts';
 
 const GenerateCodesModal = (props) => {
-  const { open, toggleModal, lessonTitles } = props;
+  const { open, toggle, lessonTitles } = props;
   console.log(props);
 
   // states for generate codes modal inputs
@@ -61,7 +61,7 @@ const GenerateCodesModal = (props) => {
   };
 
   return (
-    <Modal open={open} toggle={toggleModal} className="modal-dialog-scrollable">
+    <Modal open={open} toggle={toggle} className="modal-dialog-scrollable">
       <ModalHeader>Generate Codes</ModalHeader>
       <ModalBody>
         { !generatedCodes ? (
