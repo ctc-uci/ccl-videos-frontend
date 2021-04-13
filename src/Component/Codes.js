@@ -55,7 +55,7 @@ const Codes = () => {
     return () => {
       document.body.classList.remove('force-scrollbar');
     }
-  });
+  }, []);
 
   // extract and filter all the codes
   const codes = useMemo(() => (
@@ -69,7 +69,7 @@ const Codes = () => {
       ))
     )))
   ), [lessons]);
-  
+
   const filteredCodes = useMemo(() => (
     codes.filter((code) => (
       (lessonFilter === 'ALL' || lessonFilter === code.lessonId)
