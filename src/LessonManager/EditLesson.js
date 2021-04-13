@@ -9,6 +9,8 @@ import {
   FormRadio,
   Button,
 } from "shards-react";
+import VideoPlayer from "../Components/VideoPlayer";
+import Previewer from "../Components/Previewer";
 
 const EditLesson = ({ id, title, description, visible, video, thumbnail }) => {
   const [currentTitle, setTitle] = useState(title);
@@ -16,8 +18,7 @@ const EditLesson = ({ id, title, description, visible, video, thumbnail }) => {
   // const [thumbnailURL, setThumbnail] = useState(thumbnail);
   // const [videoURL, setVideo] = useState(video);
   const [selectedVisibility, setSelectedVisibility] = useState(visible);
-
-  //      Title, description, visibility, videourl
+  const [showPreview, setShowPreview] = useState(false);
 
   function redirect() {
     window.location.href = "displayLesson";
@@ -31,7 +32,6 @@ const EditLesson = ({ id, title, description, visible, video, thumbnail }) => {
       // thumbnailUrl: thumbnailURL,
       visible: selectedVisibility,
     };
-    console.log(updatedForm);
     // await axios
     //   .patch(`${apiURL}/lessons/${id}`, updatedForm, {
     //     withCredentials: true,
@@ -45,9 +45,19 @@ const EditLesson = ({ id, title, description, visible, video, thumbnail }) => {
     //   });
   }
 
+  function togglePreview() {
+    setShowPreview(!showPreview);
+  }
+
   return (
     <div>
       <Form>
+        <Button onClick={togglePreview}>Preview Lesson</Button>
+        <Previewer
+          isOpen={showPreview}
+          toggler={togglePreview}
+          lesson={{ video, currentTitle, currentDescription }}
+        ></Previewer>
         <FormGroup>
           <label htmlFor="#title">Title</label>
           <FormInput
@@ -71,6 +81,7 @@ const EditLesson = ({ id, title, description, visible, video, thumbnail }) => {
             }}
           />
         </FormGroup>
+        <VideoPlayer url={video}></VideoPlayer>
         <FormGroup>
           <p className="mb-3">Visibility</p>
           <FormRadio
@@ -100,6 +111,7 @@ const EditLesson = ({ id, title, description, visible, video, thumbnail }) => {
             Save Edits
           </Button>
         </FormGroup>
+        <Button theme="danger">Delete Lesson</Button>
       </Form>
     </div>
   );

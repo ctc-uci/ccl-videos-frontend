@@ -42,7 +42,7 @@ function App() {
                 thumbnail: "https://www.w3schools.com/w3css/img_lights.jpg",
                 visible: true,
                 video:
-                  "https://www.dailymotion.com/embed/video/x802p93?autoplay=false&fullscreen=true&ui-start-screen-info=false&scaleMode='fit'&queue-enable=false&sharing-enable=false&ui-logo=false",
+                  "https://ccl-videos.s3-us-west-1.amazonaws.com/hello.mp4",
               }}
             />
           )}
