@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import ModifyLesson from "./Component/ModifyLesson";
-import { Alert } from 'shards-react';
+import ModifyLesson from "./LessonManager/EditLesson";
+import { Alert } from "shards-react";
 const temp = () => <div>hello world</div>;
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={temp} />
         <Route exact path="/route" component={temp} />
-        <Route
+        {/* <Route
           exact
           path="/lessons"
           render={() => (
@@ -24,6 +24,23 @@ function App() {
                 description: "Some Description",
                 thumbnail: "https://www.w3schools.com/w3css/img_lights.jpg",
                 visible: null,
+                video:
+                  "https://www.dailymotion.com/embed/video/x802p93?autoplay=false&fullscreen=true&ui-start-screen-info=false&scaleMode='fit'&queue-enable=false&sharing-enable=false&ui-logo=false",
+              }}
+            />
+          )}
+        /> */}
+        <Route
+          exact
+          path="/create-lesson"
+          render={() => (
+            <ModifyLesson
+              {...{
+                id: "4e2403c8-0f94-4ef1-b45b-9affc979fbac",
+                title: "Some Title",
+                description: "Some Description",
+                thumbnail: "https://www.w3schools.com/w3css/img_lights.jpg",
+                visible: true,
                 video:
                   "https://www.dailymotion.com/embed/video/x802p93?autoplay=false&fullscreen=true&ui-start-screen-info=false&scaleMode='fit'&queue-enable=false&sharing-enable=false&ui-logo=false",
               }}

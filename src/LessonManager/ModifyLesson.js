@@ -14,12 +14,10 @@ const ModifyLesson = ({
   thumbnail,
 }) => {
   // Set each field w/ data passed in
-  const isEdit = category === "edit";
   const [currentTitle, setTitle] = useState(title);
   const [currentDescription, setDescription] = useState(description);
   const [thumbnailURL, setThumbnail] = useState(thumbnail);
   const [videoURL, setVideo] = useState(video);
-  const [showEditButtons, setShowButtons] = useState(isEdit ? false : true);
   const [selectedThumbnail, setSelectedThumbnail] = useState(null);
   const [imagePreview, setImagePreview] = useState();
   let visibility = visible;
