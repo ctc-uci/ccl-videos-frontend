@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import ModifyLesson from "./LessonManager/EditLesson";
+import ModifyLesson from "./lessonManager/EditLesson";
+import Previewer from "./lessonManager/Previewer";
 import { Alert } from "shards-react";
 const temp = () => <div>hello world</div>;
 
@@ -40,13 +41,13 @@ function App() {
                 title: "Some Title",
                 description: "Some Description",
                 thumbnail: "https://www.w3schools.com/w3css/img_lights.jpg",
-                visible: true,
                 video:
                   "https://ccl-videos.s3-us-west-1.amazonaws.com/hello.mp4",
               }}
             />
           )}
         />
+        <Route exact path="/previewLesson" component={Previewer} />
         {/* add more routes here */}
       </Switch>
     </Router>
