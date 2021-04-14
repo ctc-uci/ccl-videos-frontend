@@ -1,15 +1,16 @@
 import React from "react";
-const VideoPlayer = ({ url }) => {
+const VideoPlayer = ({ url, thumbnail }) => {
+  console.log(thumbnail);
   return (
-    <div>
+    <div className="vid-container">
       <video
         controls
         controlsList="nodownload"
         preload="auto"
         class="video-js"
-        data-setup="{}"
+        data-setup='{"fluid": true}'
         aspectRatio="16:9"
-        poster="https://ccl-video-thumbnails.s3-us-west-1.amazonaws.com/wireframe_fidelity_assignment4.png"
+        poster={thumbnail}
       >
         <source src={url} type="video/mp4"></source>
       </video>

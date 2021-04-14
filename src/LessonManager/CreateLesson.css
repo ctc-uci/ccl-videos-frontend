@@ -1,0 +1,67 @@
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.whole-page {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 90%;
+  height: 90vh;
+  /* border: 3px solid #73ad21; */
+}
+
+.mid-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  background-color: purple;
+  margin-top: 2em;
+}
+
+.mid-left {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 27%;
+  height: 20em;
+  /* background-color: orange; */
+}
+
+.mid-right {
+  background-color: aquamarine;
+  flex-basis: 60%;
+  height: 100%;
+}
+
+.bottom {
+  display: flex;
+  margin-top: 8em;
+}
+
+.delete {
+  /* background-color: blue; */
+  flex-basis: 50%;
+}
+
+.button-group {
+  display: inherit;
+  /* background-color: brown; */
+  justify-content: space-between;
+  flex-basis: 18%;
+}
+
+.title-section {
+  margin-bottom: 7%;
+}
+
+#description {
+  resize: none;
+  height: 20em;
+}
+
+label {
+  font-weight: 600;
+  font-size: 1.3em;
+  color: black;
+}

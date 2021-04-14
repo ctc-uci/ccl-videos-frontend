@@ -3,6 +3,8 @@ import { Button } from "shards-react";
 import VideoPlayer from "../common/VideoPlayer";
 
 const Previewer = ({ video, title, description }) => {
+  var thumbnail =
+    "https://ccl-video-thumbnails.s3-us-west-1.amazonaws.com/wireframe_fidelity_assignment4.png";
   return (
     <div>
       <Button
@@ -15,14 +17,14 @@ const Previewer = ({ video, title, description }) => {
         Close
       </Button>
       <div>
-        <VideoPlayer url={video}></VideoPlayer>
+        <VideoPlayer url={video} thumbnail={thumbnail}></VideoPlayer>
       </div>
       <div>
-        <h2>{title}</h2>
+        <h2>{title || "Empty Title"}</h2>
       </div>
       <div>
         <h5>Description</h5>
-        <p>{description}</p>
+        <p>{description || "Empty Description"}</p>
       </div>
     </div>
   );

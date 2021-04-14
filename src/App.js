@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import ModifyLesson from "./lessonManager/EditLesson";
+import EditLesson from "./lessonManager/EditLesson";
+import CreateLesson from "./lessonManager/CreateLesson";
 import Previewer from "./lessonManager/Previewer";
 import { Alert } from "shards-react";
 const temp = () => <div>hello world</div>;
@@ -17,7 +18,7 @@ function App() {
           exact
           path="/lessons"
           render={() => (
-            <ModifyLesson
+            <EditLesson
               {...{
                 id: "4e2403c8-0f94-4ef1-b45b-9affc979fbac",
                 category: "edit",
@@ -33,9 +34,25 @@ function App() {
         /> */}
         <Route
           exact
+          path="/edit-lesson"
+          render={() => (
+            <EditLesson
+              {...{
+                id: "4e2403c8-0f94-4ef1-b45b-9affc979fbac",
+                title: "Some Title",
+                description: "Some Description",
+                thumbnail: "https://www.w3schools.com/w3css/img_lights.jpg",
+                video:
+                  "https://ccl-videos.s3-us-west-1.amazonaws.com/hello.mp4",
+              }}
+            />
+          )}
+        />
+        <Route
+          exact
           path="/create-lesson"
           render={() => (
-            <ModifyLesson
+            <CreateLesson
               {...{
                 id: "4e2403c8-0f94-4ef1-b45b-9affc979fbac",
                 title: "Some Title",

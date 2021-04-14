@@ -1,0 +1,9 @@
+.vid-container {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.vid-container > video {
+  width: inherit;
+}

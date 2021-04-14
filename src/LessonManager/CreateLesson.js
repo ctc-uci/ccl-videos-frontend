@@ -4,13 +4,15 @@ import { apiURL } from "../config";
 import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
 import { useHistory, Link } from "react-router-dom";
 import VideoPlayer from "../common/VideoPlayer";
-// import "./EditLesson.css";
+import VideoDropzone from "./VideoDropzone";
+import Dropzone from "react-dropzone";
+import "./CreateLesson.css";
 
-const EditLesson = ({ id, title, description, video, thumbnail }) => {
-  const [videoTitle, setVideoTitle] = useState(title);
-  const [videoDescription, setVideoDecription] = useState(description);
+const CreateLesson = () => {
+  const [videoTitle, setVideoTitle] = useState(null);
+  const [videoDescription, setVideoDecription] = useState(null);
   // const [thumbnailURL, setThumbnail] = useState(thumbnail);
-  // const [videoURL, setVideo] = useState(video);
+  const [videoURL, setVideo] = useState(null);
   let history = useHistory();
 
   function redirect() {
@@ -18,34 +20,34 @@ const EditLesson = ({ id, title, description, video, thumbnail }) => {
   }
 
   async function onSubmit() {
-    // const updatedForm = {
+    // const newForm = {
     //   title: videoTitle,
     //   description: videoDescription,
-    //   videoUrl: video,
+    //   videoUrl: videoURL,
     //   thumbnailUrl: thumbnailURL,
     // };
     // await axios
-    //   .patch(`${apiURL}/lessons/${id}`, updatedForm, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     console.log("edit res", res);
-    //     // redirect();
-    //   })
-    //   .catch((error) => {
-    //     console.log("edit error", error);
-    //   });
+    // .post(`${apiURL}/lessons`, newForm, {
+    //   withCredentials: true,
+    // })
+    // .then((res) => {
+    //   console.log("create res", res);
+    //   // redirect();
+    // })
+    // .catch((error) => {
+    //   console.log("create error", error);
+    // });
   }
   return (
     <div>
       <Form className="whole-page">
         <div className="header-section">
-          <h1 className="title">Edit Lesson</h1>
+          <h1 className="title">Create New Lesson</h1>
           <Link
             to={{
               pathname: "/previewLesson",
               state: {
-                video: video,
+                video: videoURL,
                 title: videoTitle,
                 description: videoDescription,
               },
@@ -64,7 +66,7 @@ const EditLesson = ({ id, title, description, video, thumbnail }) => {
         </div>
         <div className="mid-section">
           <div className="mid-left">
-            <VideoPlayer url={video}></VideoPlayer>
+            <VideoDropzone></VideoDropzone>
           </div>
           <div className="mid-right">
             <FormGroup>
@@ -95,15 +97,13 @@ const EditLesson = ({ id, title, description, video, thumbnail }) => {
           </div>
         </div>
         <div className="bottom">
-          <div className="delete">
-            <Button theme="danger">Delete Lesson</Button>
-          </div>
+          <div className="delete"></div>
           <div className="button-group">
             <Button outline pill onClick={redirect}>
               Cancel
             </Button>
             <Button pill onClick={onSubmit}>
-              Save Edits
+              Create Lesson
             </Button>
           </div>
         </div>
@@ -112,4 +112,4 @@ const EditLesson = ({ id, title, description, video, thumbnail }) => {
   );
 };
 
-export default EditLesson;
+export default CreateLesson;
