@@ -1,29 +1,54 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { apiURL } from "../config";
+import { apiURL, bucket } from "../config";
 import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import VideoPlayer from "../common/VideoPlayer";
-// import "./EditLesson.css";
+import VideoDropzone from "./VideoDropzone";
+import ConfirmModal from "./ConfirmModal";
+import vid from "../video.mp4";
+import "./EditLesson.css";
 
-const EditLesson = ({ id, title, description, video, thumbnail }) => {
+const EditLesson = ({ id, title, description, video }) => {
   const [videoTitle, setVideoTitle] = useState(title);
   const [videoDescription, setVideoDecription] = useState(description);
-  // const [thumbnailURL, setThumbnail] = useState(thumbnail);
-  // const [videoURL, setVideo] = useState(video);
+  const [videoURL, setVideoURL] = useState(video);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   let history = useHistory();
 
   function redirect() {
     history.goBack();
   }
 
+  function onDelete() {
+    setShowConfirmation(true);
+  }
+
   async function onSubmit() {
-    // const updatedForm = {
-    //   title: videoTitle,
-    //   description: videoDescription,
-    //   videoUrl: video,
-    //   thumbnailUrl: thumbnailURL,
-    // };
+    const updatedForm = {
+      title: videoTitle,
+      description: videoDescription,
+      videoUrl: video,
+    };
+
+    // const awsRes = await axios.post(
+    //   `${apiURL}/upload/`,
+    //   {
+    //     contentType: "video/mp4",
+    //     bucket: bucket,
+    //   },
+    //   {
+    //     withCredentials: true,
+    //   }
+    // );
+
+    // console.log(awsRes.data.uploadURL);
+
+    // const uploadRes = await axios.post(`${awsRes.data.uploadURL}`, vid, {
+    //   withCredentials: true,
+    // });
+    // console.log(uploadRes);
+
     // await axios
     //   .patch(`${apiURL}/lessons/${id}`, updatedForm, {
     //     withCredentials: true,
@@ -41,30 +66,18 @@ const EditLesson = ({ id, title, description, video, thumbnail }) => {
       <Form className="whole-page">
         <div className="header-section">
           <h1 className="title">Edit Lesson</h1>
-          <Link
-            to={{
-              pathname: "/previewLesson",
-              state: {
-                video: video,
-                title: videoTitle,
-                description: videoDescription,
-              },
-            }}
+          <Button
+            href={`/previewLesson/${videoTitle}/${videoDescription}/${encodeURIComponent(
+              videoURL
+            )}`}
             target="_blank"
           >
-            <Button
-              className="preview"
-              onClick={(e) => {
-                e.prevetDefault();
-              }}
-            >
-              Preview Lesson
-            </Button>
-          </Link>
+            Preview Lesson
+          </Button>
         </div>
         <div className="mid-section">
           <div className="mid-left">
-            <VideoPlayer url={video}></VideoPlayer>
+            <VideoPlayer url={videoURL}></VideoPlayer>
           </div>
           <div className="mid-right">
             <FormGroup>
@@ -83,6 +96,7 @@ const EditLesson = ({ id, title, description, video, thumbnail }) => {
               <div className="description-sectio>">
                 <label htmlFor="description">Description</label>
                 <FormTextarea
+                  required
                   value={videoDescription}
                   id="description"
                   placeholder="Enter Description Here"
@@ -96,17 +110,31 @@ const EditLesson = ({ id, title, description, video, thumbnail }) => {
         </div>
         <div className="bottom">
           <div className="delete">
-            <Button theme="danger">Delete Lesson</Button>
+            <Button theme="danger" onClick={onDelete}>
+              Delete Lesson
+            </Button>
           </div>
           <div className="button-group">
             <Button outline pill onClick={redirect}>
               Cancel
             </Button>
-            <Button pill onClick={onSubmit}>
+            <Button
+              pill
+              type="Submit"
+              onClick={(e) => {
+                e.preventDefault();
+                onSubmit();
+              }}
+            >
               Save Edits
             </Button>
           </div>
         </div>
+        <ConfirmModal
+          id={id}
+          isOpen={showConfirmation}
+          toggler={setShowConfirmation}
+        ></ConfirmModal>
       </Form>
     </div>
   );

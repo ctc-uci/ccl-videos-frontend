@@ -7,3 +7,7 @@
 .vid-container > video {
   width: inherit;
 }
+
+.hidden {
+  display: none;
+}

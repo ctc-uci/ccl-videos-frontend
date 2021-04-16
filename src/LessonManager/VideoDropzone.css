@@ -70,3 +70,7 @@
 .container {
   padding-left: 0;
 }
+
+.hidden {
+  display: none;
+}

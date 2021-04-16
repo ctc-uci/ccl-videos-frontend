@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { Button } from "shards-react";
+import { Button, FormCheckbox } from "shards-react";
 import uploadIcon from "../icons/upload-icon.png";
 import "./VideoDropzone.css";
 
-function VideoDropzone({ onClose }) {
+function VideoDropzone({ notifyUpload }) {
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const {
     getRootProps,
     getInputProps,
@@ -19,24 +20,33 @@ function VideoDropzone({ onClose }) {
     noClick: true,
     noKeyboard: true,
     accept: "video/*",
+    maxFiles: 1,
+    onDropAccepted: (files) => {
+      setSelectedFiles(files);
+      notifyUpload(files);
+    },
+    onFileDialogCancel: (files) => {
+      setSelectedFiles([]);
+      console.log("canceled", files);
+    },
   });
 
   const [uploaded, setUploaded] = useState(false);
 
-  useEffect(() => {
-    let done = true;
-    const progress = document.getElementsByClassName("progress");
-    for (let i = 0; i < progress; i += 1) {
-      if (
-        progress.innerHTML !==
-        '<img alt="Progress spinner" src="/icons/check-icon.png" height="50px" />'
-      ) {
-        done = false;
-        break;
-      }
-    }
-    setUploaded(done);
-  });
+  // useEffect(() => {
+  //   let done = true;
+  //   const progress = document.getElementsByClassName("progress");
+  //   for (let i = 0; i < progress; i += 1) {
+  //     if (
+  //       progress.innerHTML !==
+  //       '<img alt="Progress spinner" src="/icons/check-icon.png" height="50px" />'
+  //     ) {
+  //       done = false;
+  //       break;
+  //     }
+  //   }
+  //   setUploaded(done);
+  // });
 
   const dropzoneBox = useMemo(() => {
     let base = "dropzone-zone";
@@ -88,6 +98,13 @@ function VideoDropzone({ onClose }) {
   //       }
   //     }
   //   };
+  useEffect(() => {
+    if (selectedFiles.length > 0) {
+      setUploaded(true);
+    } else {
+      setUploaded(false);
+    }
+  }, [selectedFiles]);
 
   const deleteUploadedTemplate = (event) => {
     const index = acceptedFiles.findIndex(
@@ -96,7 +113,7 @@ function VideoDropzone({ onClose }) {
     acceptedFiles.splice(index, 1);
   };
   return (
-    <div className="container">
+    <div className={`container ${uploaded ? "hidden" : ""}`}>
       <div className={dropzoneBox} {...getRootProps()}>
         <input {...getInputProps()} />
         <img className="icon" src={uploadIcon} alt="Upload Cloud"></img>
@@ -104,7 +121,7 @@ function VideoDropzone({ onClose }) {
         <Button onClick={open}>Select Video</Button>
       </div>
       <aside>
-        <ul className="files-list">
+        {/* <ul className="files-list">
           {acceptedFiles.map((file) => (
             <li key={file.path} className="file-item">
               <span id={file.path} className="progress">
@@ -114,8 +131,8 @@ function VideoDropzone({ onClose }) {
                 {file.path}
                 <br />
                 {file.size / 1000} KB
-              </p>
-              {/* <button
+              </p> */}
+        {/* <button
                 type="button"
                 className="remove-file-btn"
                 aria-label="Remove"
@@ -126,9 +143,9 @@ function VideoDropzone({ onClose }) {
                   src="/icons/close-icon.png"
                 />
               </button> */}
-            </li>
+        {/* </li>
           ))}
-        </ul>
+        </ul> */}
       </aside>
       {/* <div className="popup-buttons">
         <button

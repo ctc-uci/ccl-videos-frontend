@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import axios from "axios";
 import { apiURL } from "../config";
 import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import VideoPlayer from "../common/VideoPlayer";
 import VideoDropzone from "./VideoDropzone";
-import Dropzone from "react-dropzone";
 import "./CreateLesson.css";
 
 const CreateLesson = () => {
   const [videoTitle, setVideoTitle] = useState(null);
   const [videoDescription, setVideoDecription] = useState(null);
-  // const [thumbnailURL, setThumbnail] = useState(thumbnail);
-  const [videoURL, setVideo] = useState(null);
+  const [videoURL, setVideoURL] = useState(null);
   let history = useHistory();
 
   function redirect() {
     history.goBack();
+  }
+
+  function notifyUpload(file) {
+    console.log("upaloadedFuke", file);
+    console.log(file[0].type);
+    let videoFileURL = URL.createObjectURL(file[0]);
+    setVideoURL(videoFileURL);
   }
 
   async function onSubmit() {
@@ -43,30 +48,19 @@ const CreateLesson = () => {
       <Form className="whole-page">
         <div className="header-section">
           <h1 className="title">Create New Lesson</h1>
-          <Link
-            to={{
-              pathname: "/previewLesson",
-              state: {
-                video: videoURL,
-                title: videoTitle,
-                description: videoDescription,
-              },
-            }}
+          <Button
+            href={`/previewLesson/${videoTitle}/${videoDescription}/${encodeURIComponent(
+              videoURL
+            )}`}
             target="_blank"
           >
-            <Button
-              className="preview"
-              onClick={(e) => {
-                e.prevetDefault();
-              }}
-            >
-              Preview Lesson
-            </Button>
-          </Link>
+            Preview Lesson
+          </Button>
         </div>
         <div className="mid-section">
           <div className="mid-left">
-            <VideoDropzone></VideoDropzone>
+            <VideoDropzone notifyUpload={notifyUpload}></VideoDropzone>
+            <VideoPlayer url={videoURL}></VideoPlayer>
           </div>
           <div className="mid-right">
             <FormGroup>
@@ -85,6 +79,7 @@ const CreateLesson = () => {
               <div className="description-sectio>">
                 <label htmlFor="description">Description</label>
                 <FormTextarea
+                  required
                   value={videoDescription}
                   id="description"
                   placeholder="Enter Description Here"
@@ -102,7 +97,7 @@ const CreateLesson = () => {
             <Button outline pill onClick={redirect}>
               Cancel
             </Button>
-            <Button pill onClick={onSubmit}>
+            <Button type="Submit" pill onClick={onSubmit}>
               Create Lesson
             </Button>
           </div>

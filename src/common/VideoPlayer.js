@@ -1,18 +1,23 @@
-import React from "react";
-const VideoPlayer = ({ url, thumbnail }) => {
-  console.log(thumbnail);
+import React, { useEffect, useState } from "react";
+const VideoPlayer = ({ url }) => {
+  const [selectedUrl, setSelectedUrl] = useState(url);
+
+  useEffect(() => {
+    setSelectedUrl(url);
+    document.getElementById("videoSource").parentElement.load();
+  }, [url]);
+
   return (
-    <div className="vid-container">
+    <div className={url ? "vid-container" : "hidden"}>
       <video
         controls
         controlsList="nodownload"
         preload="auto"
-        class="video-js"
+        className="video-js"
         data-setup='{"fluid": true}'
-        aspectRatio="16:9"
-        poster={thumbnail}
+        aspectratio="16:9"
       >
-        <source src={url} type="video/mp4"></source>
+        <source id="videoSource" src={selectedUrl}></source>
       </video>
     </div>
   );

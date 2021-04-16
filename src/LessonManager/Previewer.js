@@ -1,10 +1,12 @@
 import React from "react";
+import { useParams, withRouter } from "react-router-dom";
 import { Button } from "shards-react";
 import VideoPlayer from "../common/VideoPlayer";
 
-const Previewer = ({ video, title, description }) => {
-  var thumbnail =
-    "https://ccl-video-thumbnails.s3-us-west-1.amazonaws.com/wireframe_fidelity_assignment4.png";
+const Previewer = () => {
+  console.log(useParams());
+  const { title, description, url } = useParams();
+  console.log(!title, description, url);
   return (
     <div>
       <Button
@@ -17,17 +19,21 @@ const Previewer = ({ video, title, description }) => {
         Close
       </Button>
       <div>
-        <VideoPlayer url={video} thumbnail={thumbnail}></VideoPlayer>
+        {url ? (
+          <VideoPlayer url={decodeURIComponent(url)}></VideoPlayer>
+        ) : (
+          <p>No Video Uploaded</p>
+        )}
       </div>
       <div>
-        <h2>{title || "Empty Title"}</h2>
+        <h2>{title ? title : "Empty Title"}</h2>
       </div>
       <div>
         <h5>Description</h5>
-        <p>{description || "Empty Description"}</p>
+        <p>{description ? description : "Empty Description"}</p>
       </div>
     </div>
   );
 };
 
-export default Previewer;
+export default withRouter(Previewer);

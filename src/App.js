@@ -64,7 +64,11 @@ function App() {
             />
           )}
         />
-        <Route exact path="/previewLesson" component={Previewer} />
+        <Route
+          exact
+          path="/previewLesson/:title/:description/:url"
+          component={Previewer}
+        />
         {/* add more routes here */}
       </Switch>
     </Router>
