@@ -4,6 +4,8 @@ import AlertBanner from './common/AlertBanner';
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
 import LessonVideo from './Component/LessonVideo';
+import Codes from "./Component/Codes";
+import { Alert } from 'shards-react';
 const temp = () => <div>hello world</div>;
 
 const DUMMY_DATA = {
@@ -38,6 +40,7 @@ function App() {
             />
           )}
         />
+        <Route exact path="/codes" component={Codes} />
         {/* add more routes here */}
         <Route
           exact
