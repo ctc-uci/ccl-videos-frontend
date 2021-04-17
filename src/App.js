@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
+import Codes from "./Component/Codes";
 import { Alert } from 'shards-react';
 const temp = () => <div>hello world</div>;
 
@@ -30,6 +31,7 @@ function App() {
             />
           )}
         />
+        <Route exact path="/codes" component={Codes} />
         {/* add more routes here */}
       </Switch>
     </Router>
