@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import FileUploader from './FileUploader';
-import VideoPlayer from './VideoPlayer';
+import VideoPlayer from '../common/VideoPlayer';
 import axios from 'axios';
 import './ModifyLesson.css';
 import { apiURL } from '../config';
