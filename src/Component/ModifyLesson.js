@@ -1,20 +1,13 @@
-import React, { useEffect, useState } from "react";
-import FileUploader from "./FileUploader";
-import VideoPlayer from "./VideoPlayer";
-import axios from "axios";
-import "./ModifyLesson.css";
-import { apiURL } from "../config";
-const ModifyLesson = ({
-  id,
-  category,
-  title,
-  description,
-  visible,
-  video,
-  thumbnail,
-}) => {
+import React, { useEffect, useState } from 'react';
+import FileUploader from './FileUploader';
+import VideoPlayer from './VideoPlayer';
+import axios from 'axios';
+import './ModifyLesson.css';
+import { apiURL } from '../config';
+
+const ModifyLesson = ({ id, category, title, description, visible, video, thumbnail }) => {
   // Set each field w/ data passed in
-  const isEdit = category === "edit";
+  const isEdit = category === 'edit';
   const [currentTitle, setTitle] = useState(title);
   const [currentDescription, setDescription] = useState(description);
   const [thumbnailURL, setThumbnail] = useState(thumbnail);
@@ -79,7 +72,7 @@ const ModifyLesson = ({
     for (var keys in newData) {
       formData.append(`${keys}`, newData[keys]);
     }
-    console.log("formData", formData.getAll("title"));
+    console.log('formData', formData.getAll('title'));
 
     if (isEdit) {
       await axios
@@ -87,11 +80,11 @@ const ModifyLesson = ({
           withCredentials: true,
         })
         .then((res) => {
-          console.log("edit res", res);
+          console.log('edit res', res);
           // window.location.href = `${internalURL}/displaylesson`;
         })
         .catch((error) => {
-          console.log("edit error", error);
+          console.log('edit error', error);
         });
     } else {
       await axios
@@ -99,11 +92,11 @@ const ModifyLesson = ({
           withCredentials: true,
         })
         .then((res) => {
-          console.log("create res", res);
+          console.log('create res', res);
           // window.location.href = `${internalURL}/displaylesson`;
         })
         .catch((error) => {
-          console.log("create error", error);
+          console.log('create error', error);
         });
     }
   }
@@ -120,7 +113,7 @@ const ModifyLesson = ({
 
   // Raise flag for either title or description
   function checkText(textbox) {
-    if (textbox.id === "title-text") {
+    if (textbox.id === 'title-text') {
       if (textbox.value !== title) {
         changeFlags.title = true;
       } else {
@@ -147,108 +140,85 @@ const ModifyLesson = ({
   }
 
   return (
-    <div className="page">
-      <form
-        onSubmit={handleSubmit}
-        onChange={isEdit ? checkDifference : null}
-        id="whole-form"
-      >
-        <div className="topbar">
-          <div id="header">
-            <h1>{isEdit ? "Edit Lesson" : "Create Lesson"}</h1>
+    <div className='page'>
+      <form onSubmit={handleSubmit} onChange={isEdit ? checkDifference : null} id='whole-form'>
+        <div className='topbar'>
+          <div id='header'>
+            <h1>{isEdit ? 'Edit Lesson' : 'Create Lesson'}</h1>
           </div>
           <div
-            className="button-container"
+            className='button-container'
             style={
               isEdit
-                ? { justifyContent: "flex-end", display: "flex" }
-                : { justifyContent: "space-between" }
-            }
-          >
+                ? { justifyContent: 'flex-end', display: 'flex' }
+                : { justifyContent: 'space-between' }
+            }>
             <button
-              type="button"
-              className="preview"
-              id="previewButton"
-              style={
-                !showEditButtons && isEdit
-                  ? { display: "block" }
-                  : { display: "none" }
-              }
-            >
+              type='button'
+              className='preview'
+              id='previewButton'
+              style={!showEditButtons && isEdit ? { display: 'block' } : { display: 'none' }}>
               PREVIEW
             </button>
             <div
-              className="editButtons"
-              style={
-                showEditButtons ? { display: "flex" } : { display: "none" }
-              }
-            >
-              <button
-                type="reset"
-                className="discard"
-                id="discardButton"
-                onClick={resetFields}
-              >
+              className='editButtons'
+              style={showEditButtons ? { display: 'flex' } : { display: 'none' }}>
+              <button type='reset' className='discard' id='discardButton' onClick={resetFields}>
                 DISCARD EDITS
               </button>
-              <button type="submit" id="saveButton">
+              <button type='submit' id='saveButton'>
                 SAVE
               </button>
             </div>
           </div>
         </div>
-        <div id="form-content">
-          <div className="mid-left">
-            <div className="video-section">
-              <div
-                id="video-player"
-                style={{ background: "purple", height: "100%" }}
-              >
+        <div id='form-content'>
+          <div className='mid-left'>
+            <div className='video-section'>
+              <div id='video-player' style={{ background: 'purple', height: '100%' }}>
                 <VideoPlayer url={videoURL}></VideoPlayer>
               </div>
-              <button type="button" id="replaceButton">
+              <button type='button' id='replaceButton'>
                 Replace Video
               </button>
             </div>
-            <div className="visibility-section">
+            <div className='visibility-section'>
               <label>Visibility</label>
               <br></br>
               <input
-                type="radio"
-                id="public-view"
+                type='radio'
+                id='public-view'
                 value={true}
-                name="view-option"
+                name='view-option'
                 defaultChecked={visible === true}
                 onClick={(e) => {
                   toggleVisibility(e);
                   checkDifference();
-                }}
-              ></input>
+                }}></input>
               <span>Public</span>
               <br></br>
               <input
-                type="radio"
-                id="hidden-view"
+                type='radio'
+                id='hidden-view'
                 value={false}
-                name="view-option"
+                name='view-option'
                 defaultChecked={visible === false}
                 onClick={(e) => {
                   toggleVisibility(e);
                   checkDifference();
-                }}
-              ></input>
+                }}></input>
               <span>Hidden</span>
             </div>
           </div>
-          <div className="mid-right">
-            <div className="textfields">
+          <div className='mid-right'>
+            <div className='textfields'>
               <label>Title</label>
               <br></br>
               <input
                 required
-                type="text"
-                name="title"
-                id="title-text"
+                type='text'
+                name='title'
+                id='title-text'
                 value={currentTitle}
                 onChange={(e) => {
                   setTitle(e.target.value);
@@ -256,14 +226,14 @@ const ModifyLesson = ({
                 }}
               />
             </div>
-            <div className="textfields">
+            <div className='textfields'>
               <label>Description</label>
               <br></br>
               <textarea
                 required
-                type="text"
-                name="description"
-                id="description-text"
+                type='text'
+                name='description'
+                id='description-text'
                 value={currentDescription}
                 onChange={(e) => {
                   setDescription(e.target.value);
@@ -272,32 +242,30 @@ const ModifyLesson = ({
               />
             </div>
             <label>Thumbnail</label>
-            <div className="thumbnail-section">
-              <div className="thumbnail-container">
+            <div className='thumbnail-section'>
+              <div className='thumbnail-container'>
                 {selectedThumbnail ? (
                   <img
                     src={imagePreview}
-                    className="imagePreview"
-                    alt="Saved Uploaded Thumbnail"
-                  ></img>
+                    className='imagePreview'
+                    alt='Saved Uploaded Thumbnail'></img>
                 ) : thumbnailURL ? (
                   <img
                     src={thumbnailURL}
-                    className="imagePreview"
-                    alt="Uploaded Thumbnail Preview"
-                  ></img>
+                    className='imagePreview'
+                    alt='Uploaded Thumbnail Preview'></img>
                 ) : (
-                  <p className="imagePreview">No thumbnail has been uploaded</p>
+                  <p className='imagePreview'>No thumbnail has been uploaded</p>
                 )}
               </div>
-              <div className="thumbnail-container">
+              <div className='thumbnail-container'>
                 <FileUploader notifyChange={fileChange}></FileUploader>
               </div>
             </div>
           </div>
         </div>
-        <div className="bottom">
-          <button type="button" id="delete">
+        <div className='bottom'>
+          <button type='button' id='delete'>
             Delete lesson
           </button>
         </div>
