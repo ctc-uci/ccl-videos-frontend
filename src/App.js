@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AlertBanner from './common/AlertBanner';
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
+import Popups from './Popups';
+import Popup from './common/Popup';
 const temp = () => <div>hello world</div>;
 
 function App() {
@@ -30,7 +32,9 @@ function App() {
           )}
         />
         {/* add more routes here */}
+        <Route exact path="/test" component={Popups} />
       </Switch>
+      <Popup />
       <AlertBanner />
     </Router>
   );
