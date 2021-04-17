@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AlertBanner from './common/AlertBanner';
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
 import AdminLogin from './Component/AdminLogin'
@@ -10,7 +11,6 @@ const temp = () => <div>hello world</div>;
 function App() {
   return (
     <Router>
-      <Alert />
       <Switch>
         <Route exact path="/" component={temp} />
         <Route exact path="/route" component={temp} />
@@ -35,6 +35,7 @@ function App() {
         />
         { /* add more routes here */ }
       </Switch>
+      <AlertBanner />
     </Router>
   );
 }
