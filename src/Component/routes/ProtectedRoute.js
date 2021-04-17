@@ -26,7 +26,6 @@ const ProtectedRoute = (props) => {
   useEffect(() => {
     (async () => {
       const verified = await verifyToken();
-      console.log(verified);
       setIsAuthenticated(verified);
       setIsLoading(false);
     })();
@@ -36,11 +35,9 @@ const ProtectedRoute = (props) => {
     return "Loading...";
   }
   if (isAuthenticated) {
-    // eslint-disable-next-line react/jsx-props-no-spreading
     return <Route {...props} />;
   }
-//   return history.push('/adminLogin');
-  window.location.replace("http://localhost:3000/adminLogin");
+  return history.push('/adminLogin');
 };
 
 export default ProtectedRoute;
