@@ -1,0 +1,35 @@
+body.force-scrollbar {
+    overflow-y: scroll;
+}
+
+.codes-container {
+    margin-top: 30px;
+}
+
+.inline-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.inline-checkboxes > label {
+    margin-right: 20px;
+}
+
+thead.sticky-header th {
+    position: sticky;
+    top: 0;
+    border: 0;
+}
+
+#generateCodesExpiration {
+    flex-shrink: 2;
+}
+
+#generateCodesExpirationUnit + div.input-group-append {
+    flex-grow: 2;
+}
+
+#generateCodesCount {
+    width: 80px;
+}
