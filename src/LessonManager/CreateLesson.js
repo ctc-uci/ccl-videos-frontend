@@ -28,7 +28,7 @@ const CreateLesson = () => {
   const getUploadURL = async () => {
     try {
       let uploadConfig = { ID: "", contentType: "video/mp4", bucket: bucket };
-      const res = await axios.post(`${apiURL}/upload/`, uploadConfig);
+      const res = await axios.post(`${apiURL}/s3/`, uploadConfig);
       console.log("getUploadURL", res);
       return res.data.uploadURL;
     } catch (err) {

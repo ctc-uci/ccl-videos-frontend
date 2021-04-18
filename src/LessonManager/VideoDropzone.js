@@ -18,7 +18,7 @@ function VideoDropzone({ notifyUpload }) {
     // Disable click and keydown behavior
     noClick: true,
     noKeyboard: true,
-    accept: "video/*",
+    accept: "video/mp4",
     maxFiles: 1,
     onDropAccepted: (files) => {
       setSelectedFiles(files);

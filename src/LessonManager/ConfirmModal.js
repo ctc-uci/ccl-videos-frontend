@@ -6,7 +6,7 @@ import { Button, Modal, ModalBody, ModalHeader } from "shards-react";
 const ConfirmModal = ({ id, extension, isOpen, toggler }) => {
   async function deleteLesson() {
     try {
-      const res = await axios.delete(`${apiURL}/upload/${id}`, {
+      const res = await axios.delete(`${apiURL}/s3/${id}`, {
         data: { extension: extension, bucket: bucket },
       });
       const mongoRes = await axios.delete(`${apiURL}/lessons/${id}`);
