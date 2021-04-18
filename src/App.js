@@ -5,6 +5,7 @@ import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
 import Popups from './Popups';
 import Popup from './common/Popup';
+import TestModals from "./common/TestModals";
 const temp = () => <div>hello world</div>;
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
       </Switch>
       <Popup />
       <AlertBanner />
+
+      <TestModals />
+      
     </Router>
   );
 }
