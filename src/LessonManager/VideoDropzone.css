@@ -1,0 +1,76 @@
+.dropzone-zone {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  max-width: 600px;
+  height: 80%;
+  padding: 60px 0;
+  border-width: 2px;
+  border-radius: 2px;
+  border-color: #00a3ff;
+  border-style: dashed;
+  background-color: #e5e5e5;
+  outline: none;
+  transition: border 0.24s ease-in-out;
+}
+
+.dropzone-active {
+  border-color: #2196f3;
+}
+
+.dropzone-accept {
+  border-color: #00e676;
+}
+
+.dropzone-reject {
+  border-color: #ff1744;
+}
+
+.dropzone-text {
+  margin-bottom: 1.3em;
+}
+
+.files-list {
+  list-style-type: none;
+  padding: 0;
+}
+.file-item {
+  display: flex;
+  width: 100%;
+  column-gap: 20px;
+  align-items: center;
+}
+.file-item p {
+  margin: 10px 0;
+}
+.remove-file-btn {
+  margin-left: auto;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.spinning-progress {
+  animation: sp 2.5s infinite linear;
+}
+@keyframes sp {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.icon {
+  height: 4em;
+  width: 4em;
+  margin-bottom: 0.3em;
+}
+
+.container {
+  padding-left: 0;
+}
+
+.hidden {
+  display: none;
+}

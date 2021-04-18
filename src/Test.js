@@ -1,6 +1,6 @@
 import React from 'react';
-import ModifyLesson from 'manageLesson/ModifyLesson';
-import LessonVideo from 'manageLesson/LessonVideo';
+import Previewer from 'lessonManager/Previewer';
+import CreateLesson from 'lessonManager/CreateLesson';
 
 const DUMMY_DATA = {
   date: new Date(),
@@ -16,20 +16,8 @@ const DUMMY_DATA = {
 const Test = () => {
   return (
     <div>
-      <ModifyLesson
-        {...{
-          id: '4e2403c8-0f94-4ef1-b45b-9affc979fbac',
-          category: 'edit',
-          title: 'Some Title',
-          description: 'Some Description',
-          thumbnail: 'https://www.w3schools.com/w3css/img_lights.jpg',
-          visible: null,
-          video:
-            "https://www.dailymotion.com/embed/video/x802p93?autoplay=false&fullscreen=true&ui-start-screen-info=false&scaleMode='fit'&queue-enable=false&sharing-enable=false&ui-logo=false",
-        }}
-      />
-
-      <LessonVideo
+      <CreateLesson />
+      <Previewer
         url={DUMMY_DATA.url}
         thumbnail={DUMMY_DATA.thumbnail}
         title={DUMMY_DATA.title}
