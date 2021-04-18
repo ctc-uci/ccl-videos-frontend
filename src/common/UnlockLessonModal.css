@@ -1,47 +1,47 @@
 .modal-header {
-    display: "flex";
-    justify-content: "center";
-    align-items: "center";
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
 }
 
 .modal-body {
-    text-align: center;
-    font-weight: 400;
-    color: #212529;
+  text-align: center;
+  font-weight: 400;
+  color: #212529;
 }
 
 .email-text {
-    margin-top: 20px;
-    margin-bottom: 8px;
+  margin-top: 20px;
+  margin-bottom: 8px;
 }
 
 .modal-button {
-    text-align: center;
+  text-align: center;
 }
 
 .date-span {
-    color: #c4183c;
-    font-weight: bold;
+  color: #c4183c;
+  font-weight: bold;
 }
 
 .close-btn {
-    float: right;
+  float: right;
 }
 
 .title {
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: center;
 }
 
 a {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 a:link {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .activate-text {
-    padding: 10px;
-    font-size: 13px;
+  padding: 10px;
+  font-size: 13px;
 }
