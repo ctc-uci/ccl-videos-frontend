@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FormInput, Button, Modal, ModalHeader, ModalBody } from 'shards-react';
 import './UnlockLessonModal.css';
 
@@ -38,7 +38,7 @@ const UnlockLessonModal = ({ open, toggle }) => {
             <Button theme='success'>Activate Now</Button>
           </div>
           <div className='activate-text'>
-            <a href='#'>Activate Lesson Later</a>
+            <a href='/'>Activate Lesson Later</a>
           </div>
         </ModalBody>
       </Modal>

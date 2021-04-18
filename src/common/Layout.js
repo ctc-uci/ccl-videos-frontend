@@ -1,6 +1,6 @@
 import React from 'react';
-import AdminNavbar from 'common/AdminNavbar';
-import CustomerNavbar from 'common/CustomerNavbar';
+import AdminNavbar from 'navbar/AdminNavbar';
+import CustomerNavbar from 'navbar/CustomerNavbar';
 import 'common/Layout.css';
 
 const isAdmin = false;

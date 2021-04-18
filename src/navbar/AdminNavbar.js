@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'shards-react';
-import 'common/AdminNavbar.css';
 import brand from 'images/white-branding.png';
+import 'navbar/AdminNavbar.css';
 
 function AppNavbar() {
   return (
