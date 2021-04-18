@@ -32,7 +32,7 @@ const DisplayLessons = () => {
         (lesson) => (
             <LessonModule
               title={lesson.title}
-              thumbnailURL={lesson.thumbnailUrl}
+              thumbnailUrl={lesson.thumbnailUrl}
             />
         )
     ), [lessons]);

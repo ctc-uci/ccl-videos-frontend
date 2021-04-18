@@ -7,6 +7,15 @@
 }
 
 .thumbnail {
-    width: 100px;
-    height: 50px;
+    max-width: max-content;
+    max-height: max-content;
+    flex-basis: 1;
+    flex-grow: 1;
+    flex-shrink: 2;
+}
+
+.infoContainer {
+    flex-basis: 2;
+    flex-grow: 2;
+    flex-shrink: 1;
 }

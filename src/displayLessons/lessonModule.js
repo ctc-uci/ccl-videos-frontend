@@ -6,14 +6,18 @@ const LessonModule = ({ title, thumbnailUrl }) => {
 
     return (
         <div className='lessonModule'>
-            <p>{thumbnailUrl}</p>
             <img className='thumbnail' src={thumbnailUrl} alt='no thumbnail'/>
-            <div>{title}</div>
-            <button className={"editButton"}>Edit</button>
-            <button className={"newCodeButton"}>New Code</button>
+            <div className={'infoContainer'}>
+                <h1>{title}</h1>
+                <button className={"editButton"}>Edit</button>
+                <button className={"newCodeButton"}>New Code</button>
+            </div>
         </div>
     );
 }
+
+// next steps: put buttons into own container, then that contianer into one with title to format
+// should look like thumbnail next to large container with title and buttons inside
 
 LessonModule.propTypes = {
     title: PropTypes.string.isRequired,
