@@ -6,6 +6,7 @@ import AlertBanner from 'common/AlertBanner';
 import Layout from 'common/Layout';
 import Test from 'Test';
 import Landing from 'Landing';
+import DisplayLessons from 'displayLessons/DisplayLessons';
 
 // code unlock area
 // use modals for stuff
@@ -21,6 +22,7 @@ function App() {
           <Route exact path='/codes' component={Codes} />
           <Route exact path='/test' component={Test}></Route>
           <Route exact path='/login' component={AdminLogin}></Route>
+          <Route exact path='/lessons' component={DisplayLessons}></Route>
         </Layout>
       </Switch>
       <AlertBanner />
