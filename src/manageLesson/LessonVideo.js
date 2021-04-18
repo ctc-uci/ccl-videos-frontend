@@ -1,6 +1,6 @@
 import React from "react";
-import './LessonVideo.css';
-import VideoPlayer from '../common/VideoPlayer';
+import 'manageLesson/LessonVideo.css';
+import VideoPlayer from 'common/VideoPlayer';
 
 const LessonVideo = ({ url, thumbnail, title, desc, date }) => {
   const getDate = (uploadDate) => {
