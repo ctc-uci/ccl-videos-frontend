@@ -12,11 +12,11 @@ import {
   FormSelect,
   FormCheckbox,
 } from 'shards-react';
-import ClickToCopy from './ClickToCopy';
-import GenerateCodesModal from './GenerateCodesModal';
-import config from '../config';
-import { CODE_STATUS_VALUES, CODE_STATUS_CHECKBOXES } from '../consts';
-import './Codes.css';
+import config from 'config';
+import { CODE_STATUS_VALUES, CODE_STATUS_CHECKBOXES } from 'consts';
+import ClickToCopy from 'common/ClickToCopy';
+import GenerateCodesModal from 'codes/GenerateCodesModal';
+import 'codes/Codes.css';
 
 const Codes = () => {
   const [lessons, setLessons] = useState([]);

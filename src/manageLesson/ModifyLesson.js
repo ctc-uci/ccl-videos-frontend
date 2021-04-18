@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import FileUploader from './FileUploader';
-import VideoPlayer from '../common/VideoPlayer';
+import FileUploader from 'manageLesson/FileUploader';
+import VideoPlayer from 'common/VideoPlayer';
 import axios from 'axios';
-import './ModifyLesson.css';
-import { apiURL } from '../config';
+import { apiURL } from 'config';
+import 'manageLesson/ModifyLesson.css';
 
 const ModifyLesson = ({ id, category, title, description, visible, video, thumbnail }) => {
   // Set each field w/ data passed in
