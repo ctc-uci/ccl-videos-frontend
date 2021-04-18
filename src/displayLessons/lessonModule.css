@@ -1,21 +1,32 @@
 .lessonModule {
     border: 1px solid black;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    margin: 5px;
-    padding: 10px;
+    margin: 40px;
+    width: 400px;
+    height: 400px;
 }
 
 .thumbnail {
-    max-width: max-content;
-    max-height: max-content;
-    flex-basis: 1;
-    flex-grow: 1;
-    flex-shrink: 2;
+    width: 100%;
+    height: 56.25%;
 }
 
-.infoContainer {
-    flex-basis: 2;
-    flex-grow: 2;
-    flex-shrink: 1;
+.videoTitle {
+    font-size: x-large;
+}
+
+.button {
+    margin: 20px;
+    margin-left: 0px;
+    margin-top: 50px;
+}
+
+.button #text {
+    margin: 10px;
+}
+
+.icon {
+    margin-right: 5px;
 }

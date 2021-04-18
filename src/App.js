@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AlertBanner from './common/AlertBanner';
 import "./App.css";
 import ModifyLesson from "./Component/ModifyLesson";
+import DisplayLessons from "./displayLessons/displayLessons"
 import Codes from "./Component/Codes";
 import { Alert } from 'shards-react';
 const temp = () => <div>hello world</div>;
