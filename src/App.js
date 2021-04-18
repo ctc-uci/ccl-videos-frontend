@@ -5,8 +5,7 @@ import Codes from 'codes/Codes';
 import AlertBanner from 'common/AlertBanner';
 import Layout from 'common/Layout';
 import Test from 'Test';
-
-const temp = () => <div>hello world</div>;
+import Landing from 'Landing';
 
 // code unlock area
 // use modals for stuff
@@ -18,7 +17,7 @@ function App() {
     <Router>
       <Switch>
         <Layout>
-          <Route exact path='/' component={temp} />
+          <Route exact path='/' component={Landing} />
           <Route exact path='/codes' component={Codes} />
           <Route exact path='/test' component={Test}></Route>
           <Route exact path='/login' component={AdminLogin}></Route>
