@@ -1,0 +1,45 @@
+.Footer1 {
+    background-color: #0067F4;
+    padding: 1%
+}
+.websiteContainer{
+    font-size: 20px;
+    padding: 20px;
+}
+.socialMediaContainer{
+    padding: 20px;
+}
+.footerTextBold{
+    font-size: 1.8vh;
+    color: white;
+    margin: 5px;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-top: 10px;
+    font-family: Poppins;
+}
+.footerText{
+    font-size: 1.7vh;
+    color: white;
+    margin: 5px;
+    line-height: 1.5em;
+    font-weight: 300;
+    font-family: Poppins;
+}
+.contactContainer{
+    flex-direction: column;
+    justify-content: center;
+    text-align: right;
+    padding-right: 80px;
+    display: flex;
+    align-items: right; 
+}
+.addressFooter{
+    padding-right: 10vw;
+}
+
+@media only screen and (max-width: 900px) {
+    .contactContainer {
+        text-align: left;
+    }
+  }
