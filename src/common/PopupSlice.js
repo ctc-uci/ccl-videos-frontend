@@ -6,7 +6,6 @@ export const PopupSlice = createSlice({
   },
   reducers: {
     createPopup: (state, action) => {
-      console.log("in createPopup");
       state.popups.push({
         message: action.payload.message
       });

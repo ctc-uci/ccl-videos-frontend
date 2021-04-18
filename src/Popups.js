@@ -9,10 +9,11 @@ const Popups = () => {
     <div>
       <Button onClick={() => {
         console.log("hey");
-        dispatch(createPopup({ message: 'hello' }));
+        dispatch(createPopup({ message: 'hello'}));
         }}>Click Me!</Button>
     </div>
   )
 }
 
 export default Popups
+
