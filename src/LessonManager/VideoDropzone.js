@@ -13,7 +13,6 @@ function VideoDropzone({ notifyUpload }) {
     isDragActive,
     isDragAccept,
     isDragReject,
-    acceptedFiles,
     open,
   } = useDropzone({
     // Disable click and keydown behavior
