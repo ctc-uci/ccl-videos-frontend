@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useMemo, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { Button, FormCheckbox } from "shards-react";
+import { Button } from "shards-react";
 import uploadIcon from "../icons/upload-icon.png";
 import "./VideoDropzone.css";
 
@@ -106,12 +106,12 @@ function VideoDropzone({ notifyUpload }) {
     }
   }, [selectedFiles]);
 
-  const deleteUploadedTemplate = (event) => {
-    const index = acceptedFiles.findIndex(
-      (file) => file.name === event.target.parentNode.parentNode.parentNode.id
-    );
-    acceptedFiles.splice(index, 1);
-  };
+  // const deleteUploadedTemplate = (event) => {
+  //   const index = acceptedFiles.findIndex(
+  //     (file) => file.name === event.target.parentNode.parentNode.parentNode.id
+  //   );
+  //   acceptedFiles.splice(index, 1);
+  // };
   return (
     <div className={`container ${uploaded ? "hidden" : ""}`}>
       <div className={dropzoneBox} {...getRootProps()}>
