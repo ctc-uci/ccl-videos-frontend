@@ -1,5 +1,6 @@
-import React, { useRef } from "react";
-import "./FileUploader.css";
+import React, { useRef } from 'react';
+import 'manageLesson/FileUploader.css';
+
 const FileUploader = ({ notifyChange }) => {
   const fileInputRef = useRef();
 
@@ -12,22 +13,21 @@ const FileUploader = ({ notifyChange }) => {
   };
 
   return (
-    <div id="chooserContainer">
+    <div id='chooserContainer'>
       <input
-        id="fileChooser"
-        type="file"
-        name="file"
-        accept="image/*"
+        id='fileChooser'
+        type='file'
+        name='file'
+        accept='image/*'
         onChange={changeHandler}
         ref={fileInputRef}
       />
       <button
-        id="uploader"
+        id='uploader'
         onClick={(e) => {
           e.preventDefault();
           fileInputRef.current.click();
-        }}
-      >
+        }}>
         Upload Thumbnail
       </button>
     </div>

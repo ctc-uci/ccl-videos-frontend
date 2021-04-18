@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Alert } from 'shards-react';
-import './AlertBanner.css';
+import 'common/AlertBanner.css';
 
 const AlertBanner = () => {
   const { alerts } = useSelector(state => state.notifications);
