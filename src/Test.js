@@ -7,6 +7,7 @@ import UnlockLessonModal from 'common/UnlockLessonModal';
 import OopsModal from 'common/OopsModal';
 import DisplayLessons from 'displayLessons/displayLessons';
 import AdminLogin from 'adminLogin/AdminLogin';
+import Footer from 'footer/Footer'
 
 const DUMMY_DATA = {
   date: new Date(),
@@ -61,6 +62,7 @@ const Test = () => {
       <Button onClick={toggle}>Oops Modal</Button>
       <UnlockLessonModal open={open2} toggle={toggle2} />
       <OopsModal open={open} toggle={toggle} />
+      <Footer />
     </div>
   );
 };
