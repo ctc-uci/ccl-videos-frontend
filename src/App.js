@@ -6,7 +6,7 @@ import AlertBanner from 'common/AlertBanner';
 import Layout from 'common/Layout';
 import Test from 'Test';
 import Landing from 'Landing';
-import DisplayLessons from 'displayLessons/DisplayLessons';
+import DisplayLessons from 'displayLessons/displayLessons';
 
 // code unlock area
 // use modals for stuff

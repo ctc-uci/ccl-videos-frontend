@@ -1,0 +1,14 @@
+.header {
+    margin: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.lessons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.plus {
+    margin-right: 5px;
+}

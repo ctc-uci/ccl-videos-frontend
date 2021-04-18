@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Button } from 'shards-react';
 import UnlockLessonModal from 'common/UnlockLessonModal';
 import OopsModal from 'common/OopsModal';
+import DisplayLessons from 'displayLessons/displayLessons';
 
 const DUMMY_DATA = {
   date: new Date(),
@@ -32,6 +33,7 @@ const Test = () => {
 
   return (
     <div>
+      <DisplayLessons />
       <CreateLesson />
       <VideoPlayer
         url={DUMMY_DATA.url}

@@ -1,48 +1,63 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Button } from 'shards-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import LessonModule from './lessonModule';
 import axios from 'axios';
-import LessonModule from 'displayLessons/LessonModule'
+import './displayLessons.css';
 
+// TODO: fix urls to come from config
 const DisplayLessons = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [lessons, setLessons] = useState(JSON.parse(localStorage.getItem('lessons')) || []);
+  const [isLoading, setIsLoading] = useState(true);
+  const [lessons, setLessons] = useState([]);
 
-    const getLessons = async () => {
+  const getLessons = async () => {
+    const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
+    console.log(res);
+    setLessons(res.data);
+    setIsLoading(false);
+  };
+
+  // TODO: this code block could definitely be cleaned up. Looks super messy
+  useEffect(() => {
+    if (lessons.length === 0) {
+      getLessons();
+    } else {
+      setIsLoading(false);
+      (async () => {
         const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
-        localStorage.setItem('lessons', JSON.stringify(res.data));
-        setLessons(res.data);
-        setIsLoading(false);
-    };
-
-    useEffect(() => {
-        if (lessons.length === 0) {
-            getLessons();
-        } else {
-            setIsLoading(false);
-            const res = axios.get('http://localhost:8000/lessons', { withCredentials: true });
-            if (res.data !== lessons) {
-                getLessons();
-            }
+        if (res.data !== lessons) {
+          getLessons();
         }
-        return () => (true);
-    }, [lessons]);
+      })();
+    }
+    return () => true;
+  }, []);
 
-    const lessonList = useMemo(() => lessons.map(
-        (temp) => (
-            <LessonModule
-              title={temp.title}
-              thumbnailURL={temp.thumbnailURL}
-            />
-        )
-    ), [lessons]);
+  const lessonList = useMemo(
+    () =>
+      lessons.map((lesson) => (
+        <LessonModule
+          title={lesson.title}
+          thumbnailUrl={lesson.thumbnailUrl}
+          className='lessonCard'
+        />
+      )),
+    [lessons]
+  );
 
-    return (
-        <div>
-            <div>Lessons</div>
-            <button>CREATE NEW LESSON</button>
-            {isLoading ? <h1>LOADING</h1> : lessonList}
-        </div>
-    );
+  return (
+    <div>
+      <div className='header'>
+        <h1>Lessons</h1>
+        <Button>
+          <FontAwesomeIcon icon={faPlus} className='plus' />
+          CREATE NEW LESSON
+        </Button>
+      </div>
+      <div className='lessons'>{isLoading ? <h1>LOADING</h1> : lessonList}</div>
+    </div>
+  );
 };
-
 
 export default DisplayLessons;
