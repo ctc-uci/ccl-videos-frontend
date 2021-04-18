@@ -1,7 +1,7 @@
 import React, { useState, useReducer } from 'react';
 import { Tooltip } from 'shards-react';
 import copy from 'copy-to-clipboard';
-import './ClickToCopy.css';
+import 'common/ClickToCopy.css';
 
 const ClickToCopy = (props) => {
   const [isTooltipOpen, toggleTooltip] = useReducer((prev) => !prev, false);

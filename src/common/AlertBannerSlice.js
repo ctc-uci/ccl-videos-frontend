@@ -1,17 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
+
 export const AlertBannerSlice = createSlice({
-  name: "alertBanner",
+  name: 'alertBanner',
   initialState: {
-    alerts: []
+    alerts: [],
   },
   reducers: {
     createAlert: (state, action) => {
       state.alerts.push({
         message: action.payload.message,
-        theme: action.payload.theme
+        theme: action.payload.theme,
       });
     },
-  }
+  },
 });
 
 export const { createAlert } = AlertBannerSlice.actions;
