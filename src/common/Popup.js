@@ -4,7 +4,7 @@ import { Modal, ModalHeader, ModalBody } from 'shards-react';
 
 const Popup = () => {
   const { popups } = useSelector(state => state.popups);
-  const [popup, setPopup] = useState({ message: ""}); // see if you can pass in component/html string to useState
+  const [popup, setPopup] = useState({ message: ''}); // see if you can pass in component/html string to useState
   const [showPopup, setShowPopup] = useState(false);
 
   const closePopup = () => {
