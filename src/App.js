@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
-import EditLesson from "./lessonManager/EditLesson";
-import CreateLesson from "./lessonManager/CreateLesson";
-import Previewer from "./lessonManager/Previewer";
+import EditLesson from "./LessonManager/EditLesson";
+import CreateLesson from "./LessonManager/CreateLesson";
+import Previewer from "./LessonManager/Previewer";
 import { Alert } from "shards-react";
 const temp = () => <div>hello world</div>;
 
@@ -38,12 +38,11 @@ function App() {
           render={() => (
             <EditLesson
               {...{
-                id: "4e2403c8-0f94-4ef1-b45b-9affc979fbac",
-                title: "Some Title",
-                description: "Some Description",
-                thumbnail: "https://www.w3schools.com/w3css/img_lights.jpg",
+                id: "3db31046-0654-4929-948d-d432fa036712",
+                title: "JOJO",
+                description: "JOJO",
                 video:
-                  "https://ccl-videos.s3-us-west-1.amazonaws.com/hello.mp4",
+                  "https://ccl-video-thumbnails.s3.us-west-1.amazonaws.com/video/3db31046-0654-4929-948d-d432fa036712.mp4",
               }}
             />
           )}
@@ -54,10 +53,8 @@ function App() {
           render={() => (
             <CreateLesson
               {...{
-                id: "4e2403c8-0f94-4ef1-b45b-9affc979fbac",
                 title: "Some Title",
                 description: "Some Description",
-                thumbnail: "https://www.w3schools.com/w3css/img_lights.jpg",
                 video:
                   "https://ccl-videos.s3-us-west-1.amazonaws.com/hello.mp4",
               }}

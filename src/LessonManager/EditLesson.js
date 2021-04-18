@@ -4,15 +4,15 @@ import { apiURL, bucket } from "../config";
 import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
 import { useHistory } from "react-router-dom";
 import VideoPlayer from "../common/VideoPlayer";
-import VideoDropzone from "./VideoDropzone";
 import ConfirmModal from "./ConfirmModal";
-import vid from "../video.mp4";
 import "./EditLesson.css";
+import VideoDropzone from "./VideoDropzone";
 
 const EditLesson = ({ id, title, description, video }) => {
   const [videoTitle, setVideoTitle] = useState(title);
   const [videoDescription, setVideoDecription] = useState(description);
   const [videoURL, setVideoURL] = useState(video);
+  const [videoFile, setVideoFile] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   let history = useHistory();
 
@@ -24,43 +24,69 @@ const EditLesson = ({ id, title, description, video }) => {
     setShowConfirmation(true);
   }
 
-  async function onSubmit() {
-    const updatedForm = {
-      title: videoTitle,
-      description: videoDescription,
-      videoUrl: video,
-    };
-
-    // const awsRes = await axios.post(
-    //   `${apiURL}/upload/`,
-    //   {
-    //     contentType: "video/mp4",
-    //     bucket: bucket,
-    //   },
-    //   {
-    //     withCredentials: true,
-    //   }
-    // );
-
-    // console.log(awsRes.data.uploadURL);
-
-    // const uploadRes = await axios.post(`${awsRes.data.uploadURL}`, vid, {
-    //   withCredentials: true,
-    // });
-    // console.log(uploadRes);
-
-    // await axios
-    //   .patch(`${apiURL}/lessons/${id}`, updatedForm, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     console.log("edit res", res);
-    //     // redirect();
-    //   })
-    //   .catch((error) => {
-    //     console.log("edit error", error);
-    //   });
+  function notifyUpload(file) {
+    setVideoFile(file[0]);
+    let videoFileURL = URL.createObjectURL(file[0]);
+    setVideoURL(videoFileURL);
+    console.log("vidFile", videoFile);
   }
+
+  const getUploadURL = async () => {
+    try {
+      let uploadConfig = { ID: id, contentType: "video/mp4", bucket: bucket };
+      const res = await axios.post(`${apiURL}/upload/`, uploadConfig);
+      console.log("getUploadURL", res);
+      return res.data.uploadURL;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadVideo = async (link) => {
+    try {
+      console.log(videoFile);
+      const res = await axios.put(link, videoFile, {
+        headers: {
+          "Content-Type": "video/mp4",
+        },
+      });
+      console.log("uploadVideo res", res);
+      var url = res.config.url.split("?")[0];
+      return url;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  async function onSubmit() {
+    let vidLink = videoURL;
+    if (videoFile) {
+      try {
+        const uploadUrl = await getUploadURL();
+        vidLink = await uploadVideo(uploadUrl);
+        console.log("vidLinK", vidLink);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    try {
+      let newLesson = {
+        lessonId: id,
+        title: videoTitle,
+        description: videoDescription,
+        videoUrl: vidLink,
+      };
+      console.log("newLesson", newLesson);
+      await axios.patch(`${apiURL}/lessons/${id}`, newLesson, {
+        withCredentials: true,
+      });
+      // redirect();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div>
       <Form className="whole-page">
@@ -78,6 +104,14 @@ const EditLesson = ({ id, title, description, video }) => {
         <div className="mid-section">
           <div className="mid-left">
             <VideoPlayer url={videoURL}></VideoPlayer>
+            <VideoDropzone notifyUpload={notifyUpload}></VideoDropzone>
+            {/* <Button
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              Replace Video
+            </Button> */}
           </div>
           <div className="mid-right">
             <FormGroup>
@@ -110,11 +144,14 @@ const EditLesson = ({ id, title, description, video }) => {
         </div>
         <div className="bottom">
           <div className="delete">
+            {/* <Button theme="danger" onClick={onDelete}>
+              Delete Lesson
+            </Button> */}
+          </div>
+          <div className="button-group">
             <Button theme="danger" onClick={onDelete}>
               Delete Lesson
             </Button>
-          </div>
-          <div className="button-group">
             <Button outline pill onClick={redirect}>
               Cancel
             </Button>
@@ -132,6 +169,7 @@ const EditLesson = ({ id, title, description, video }) => {
         </div>
         <ConfirmModal
           id={id}
+          extension={"mp4"}
           isOpen={showConfirmation}
           toggler={setShowConfirmation}
         ></ConfirmModal>

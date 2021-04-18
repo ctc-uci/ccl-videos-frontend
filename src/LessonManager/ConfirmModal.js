@@ -1,22 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { apiURL } from "../config";
+import { apiURL, bucket } from "../config";
 
 import { Button, Modal, ModalBody, ModalHeader } from "shards-react";
-const ConfirmModal = ({ id, isOpen, toggler }) => {
-  function deleteLesson() {
-    // await axios
-    //   .delete(`${apiURL}/lessons/${id}`, {
-    //     withCredentials: true,
-    //   })
-    //   .then((res) => {
-    //     console.log("delete res", res);
-    //     // redirect();
-    //   })
-    //   .catch((error) => {
-    //     console.log("delete error", error);
-    //   });
+const ConfirmModal = ({ id, extension, isOpen, toggler }) => {
+  async function deleteLesson() {
+    try {
+      const res = await axios.delete(`${apiURL}/upload/${id}`, {
+        data: { extension: extension, bucket: bucket },
+      });
+      const mongoRes = await axios.delete(`${apiURL}/lessons/${id}`);
+      //redirect();
+      console.log(("delete res", { res, mongoRes }));
+    } catch (err) {
+      console.log("delete error", err);
+    }
   }
+
   return (
     <div>
       <Modal open={isOpen} toggle={toggler}>

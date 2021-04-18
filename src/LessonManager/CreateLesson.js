@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useDebugValue, useEffect, useState } from "react";
 import axios from "axios";
-import { apiURL } from "../config";
+import { apiURL, bucket } from "../config";
 import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
 import { useHistory } from "react-router-dom";
 import VideoPlayer from "../common/VideoPlayer";
@@ -11,6 +11,7 @@ const CreateLesson = () => {
   const [videoTitle, setVideoTitle] = useState(null);
   const [videoDescription, setVideoDecription] = useState(null);
   const [videoURL, setVideoURL] = useState(null);
+  const [videoFile, setVideoFile] = useState(null);
   let history = useHistory();
 
   function redirect() {
@@ -18,30 +19,64 @@ const CreateLesson = () => {
   }
 
   function notifyUpload(file) {
-    console.log("upaloadedFuke", file);
-    console.log(file[0].type);
+    setVideoFile(file[0]);
     let videoFileURL = URL.createObjectURL(file[0]);
     setVideoURL(videoFileURL);
+    console.log("vidFile", videoFile);
   }
 
+  const getUploadURL = async () => {
+    try {
+      let uploadConfig = { ID: "", contentType: "video/mp4", bucket: bucket };
+      const res = await axios.post(`${apiURL}/upload/`, uploadConfig);
+      console.log("getUploadURL", res);
+      return res.data.uploadURL;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const uploadVideo = async (link) => {
+    try {
+      console.log(videoFile);
+      const res = await axios.put(link, videoFile, {
+        headers: {
+          "Content-Type": "video/mp4",
+        },
+      });
+      console.log("uploadVideo res", res);
+      var vidLink = res.config.url.split("?")[0];
+      return vidLink;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   async function onSubmit() {
-    // const newForm = {
-    //   title: videoTitle,
-    //   description: videoDescription,
-    //   videoUrl: videoURL,
-    //   thumbnailUrl: thumbnailURL,
-    // };
-    // await axios
-    // .post(`${apiURL}/lessons`, newForm, {
-    //   withCredentials: true,
-    // })
-    // .then((res) => {
-    //   console.log("create res", res);
-    //   // redirect();
-    // })
-    // .catch((error) => {
-    //   console.log("create error", error);
-    // });
+    let vidLink;
+    try {
+      const uploadUrl = await getUploadURL();
+      vidLink = await uploadVideo(uploadUrl);
+      console.log("vidLinK", vidLink);
+    } catch (err) {
+      console.log(err);
+    }
+
+    try {
+      let newLesson = {
+        lessonId: vidLink.split("/video/")[1].split(".")[0],
+        title: videoTitle,
+        description: videoDescription,
+        videoUrl: vidLink,
+      };
+      console.log("newLesson", newLesson);
+      await axios.post(`${apiURL}/lessons/`, newLesson, {
+        withCredentials: true,
+      });
+      // redirect();
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (
     <div>
@@ -61,6 +96,13 @@ const CreateLesson = () => {
           <div className="mid-left">
             <VideoDropzone notifyUpload={notifyUpload}></VideoDropzone>
             <VideoPlayer url={videoURL}></VideoPlayer>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+              }}
+            >
+              Replace Video
+            </Button>
           </div>
           <div className="mid-right">
             <FormGroup>
@@ -97,7 +139,14 @@ const CreateLesson = () => {
             <Button outline pill onClick={redirect}>
               Cancel
             </Button>
-            <Button type="Submit" pill onClick={onSubmit}>
+            <Button
+              type="Submit"
+              pill
+              onClick={(e) => {
+                e.preventDefault();
+                onSubmit();
+              }}
+            >
               Create Lesson
             </Button>
           </div>
