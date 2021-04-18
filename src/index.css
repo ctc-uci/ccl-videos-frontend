@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* application overrides */
+
+h1 {
+  font-size: 48px !important;
+}
+
+h2 {
+  font-size: 24px !important;
+}
+
+p {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  color: #212529
+}

@@ -1,0 +1,26 @@
+.landing-header-container {
+  display: flex;
+  margin: 95px 0;
+}
+
+.landing-header-input-container {
+  padding-top: 40px;
+}
+
+.landing-header-input-text {
+  padding-bottom: 40px;
+  font-weight: 500;
+  line-height: 72px;
+}
+
+.landing-header-input {
+  max-width: 500px;
+}
+
+.landing-container {
+  margin: 0 60px;
+}
+
+.faq {
+  background-color: #e9ecef;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import Previewer from 'lessonManager/Previewer';
+import VideoPlayer from 'customerVideoPlayer/VideoPlayer';
 import CreateLesson from 'lessonManager/CreateLesson';
 import { useState } from 'react';
 import { Button } from 'shards-react';
@@ -33,7 +33,7 @@ const Test = () => {
   return (
     <div>
       <CreateLesson />
-      <Previewer
+      <VideoPlayer
         url={DUMMY_DATA.url}
         thumbnail={DUMMY_DATA.thumbnail}
         title={DUMMY_DATA.title}
