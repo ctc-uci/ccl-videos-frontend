@@ -1,6 +1,10 @@
 import React from 'react';
 import Previewer from 'lessonManager/Previewer';
 import CreateLesson from 'lessonManager/CreateLesson';
+import { useState } from 'react';
+import { Button } from 'shards-react';
+import UnlockLessonModal from 'common/UnlockLessonModal';
+import OopsModal from 'common/OopsModal';
 
 const DUMMY_DATA = {
   date: new Date(),
@@ -14,6 +18,18 @@ const DUMMY_DATA = {
 };
 
 const Test = () => {
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+
+  const toggle = () => {
+    setOpen(!open);
+  };
+
+  const toggle2 = () => {
+    setOpen2(!open2);
+  };
+
+
   return (
     <div>
       <CreateLesson />
@@ -24,6 +40,10 @@ const Test = () => {
         desc={DUMMY_DATA.desc}
         date={DUMMY_DATA.date}
       />
+      <Button onClick={toggle2}>Unlock Lesson Modal</Button>
+      <Button onClick={toggle}>Oops Modal</Button>
+      <UnlockLessonModal open={open2} toggle={toggle2} />
+      <OopsModal open={open} toggle={toggle} />
     </div>
   );
 };
