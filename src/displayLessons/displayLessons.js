@@ -32,7 +32,7 @@ const DisplayLessons = () => {
       })();
     }
     return () => true;
-  }, []);
+  }, [lessons]);
 
   const lessonList = useMemo(
     () =>

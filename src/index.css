@@ -27,3 +27,8 @@ p {
   font-weight: 400 !important;
   color: #212529
 }
+
+.help-text {
+  color: red;
+  text-decoration: underline;
+}
