@@ -3,14 +3,17 @@
     padding: 1%;
     height: 100%;
 }
+
 .websiteContainer{
     padding: 20px;
     display: flex;
     flex-direction: column;
 }
+
 .socialMediaContainer{
     padding: 20px;
 }
+
 .footerTextBold{
     font-size: 1.7vh !important;
     color: white;
@@ -23,10 +26,12 @@
 a:link{
     text-decoration: none;
 }
+
 a:hover{
     text-decoration: none;
     color: white
 }
+
 .footerText{
     font-size: 1.5vh !important;
     color: white;
@@ -35,6 +40,7 @@ a:hover{
     font-weight: 300;
     font-family: Poppins;
 }
+
 .contactContainer{
     padding: 20px;
     flex-direction: column;
@@ -43,6 +49,7 @@ a:hover{
     display: flex;
     align-items: right; 
 }
+
 .addressFooter{
     padding-right: 10vw;
 }
