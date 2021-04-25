@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { apiURL, bucket } from "../config";
 import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import VideoPlayer from "lessonManager/common/VideoPlayer";
+import VideoPlayer from "common/VideoPlayer";
 import ConfirmModal from "lessonManager/ConfirmModal";
 import VideoDropzone from "lessonManager/VideoDropzone";
 import "lessonManager/EditLesson.css";
@@ -25,10 +27,10 @@ const EditLesson = ({ id, title, description, video }) => {
   }
 
   function notifyUpload(file) {
-    setVideoFile(file[0]);
     let videoFileURL = URL.createObjectURL(file[0]);
     setVideoURL(videoFileURL);
-    console.log("vidFile", videoFile);
+    setVideoFile(file[0]);
+    console.log("videoFileURL", videoURL);
   }
 
   const getUploadURL = async () => {
@@ -91,27 +93,29 @@ const EditLesson = ({ id, title, description, video }) => {
     <div>
       <Form className="whole-page">
         <div className="header-section">
-          <h1 className="title">Edit Lesson</h1>
+          <h1 className="lesson-title">Edit Lesson</h1>
           <Button
+            id="previewer"
             href={`/previewLesson/${videoTitle}/${videoDescription}/${encodeURIComponent(
               videoURL
             )}`}
             target="_blank"
           >
+            <FontAwesomeIcon
+              icon={faExternalLinkAlt}
+              className="external-link-alt"
+            />
             Preview Lesson
           </Button>
         </div>
         <div className="mid-section">
           <div className="mid-left">
             <VideoPlayer url={videoURL}></VideoPlayer>
-            <VideoDropzone notifyUpload={notifyUpload}></VideoDropzone>
-            {/* <Button
-              onClick={(e) => {
-                e.preventDefault();
-              }}
-            >
-              Replace Video
-            </Button> */}
+
+            <VideoDropzone
+              notifyUpload={notifyUpload}
+              isVideo={true}
+            ></VideoDropzone>
           </div>
           <div className="mid-right">
             <FormGroup>
@@ -144,19 +148,18 @@ const EditLesson = ({ id, title, description, video }) => {
         </div>
         <div className="bottom">
           <div className="delete">
-            {/* <Button theme="danger" onClick={onDelete}>
-              Delete Lesson
-            </Button> */}
-          </div>
-          <div className="button-group">
-            <Button theme="danger" onClick={onDelete}>
+            {" "}
+            <Button id="deleter" theme="danger" onClick={onDelete}>
               Delete Lesson
             </Button>
+          </div>
+          <div className="button-group">
             <Button outline pill onClick={redirect}>
               Cancel
             </Button>
             <Button
               pill
+              id="submitter"
               type="Submit"
               onClick={(e) => {
                 e.preventDefault();
