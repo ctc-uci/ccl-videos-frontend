@@ -11,13 +11,13 @@ const LessonModule = ({ title, thumbnailUrl }) => {
     <Card className='lessonModule'>
       <CardImg className='thumbnail' top src={thumbnailUrl}></CardImg>
       <CardBody>
-        <CardTitle className='videoTitle'>{title}</CardTitle>
-        <Button className='button'>
-          <FontAwesomeIcon icon={faEdit} className='icon' />
+        <CardTitle className='lesson-videoTitle' title={title}>{title}</CardTitle>
+        <Button className='lesson-module-button'>
+          <FontAwesomeIcon icon={faEdit} className='lesson-icon' />
           {' Edit'}
         </Button>
-        <Button className='button'>
-          <FontAwesomeIcon icon={faKey} className='icon' />
+        <Button className='lesson-module-button'>
+          <FontAwesomeIcon icon={faKey} className='lesson-icon' />
           {' New Code'}
         </Button>
       </CardBody>
