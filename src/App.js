@@ -4,7 +4,7 @@ import AdminLogin from 'adminLogin/AdminLogin';
 import Codes from 'codes/Codes';
 import Layout from 'common/Layout';
 import Test from 'Test';
-import Landing from 'landing/Landing';
+import CustomerPageContainer from 'landing/CustomerPageContainer';
 import DisplayLessons from 'displayLessons/displayLessons';
 
 // code unlock area
@@ -17,7 +17,7 @@ function App() {
     <Router>
       <Switch>
         <Layout>
-          <Route exact path='/' component={Landing} />
+          <Route exact path='/' component={CustomerPageContainer} />
           <Route exact path='/codes' component={Codes} />
           <Route exact path='/test' component={Test}></Route>
           <Route exact path='/login' component={AdminLogin}></Route>

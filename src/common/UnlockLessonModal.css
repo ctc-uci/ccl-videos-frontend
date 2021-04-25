@@ -28,20 +28,21 @@
   float: right;
 }
 
-.title {
+.modal-title {
   width: 100%;
   text-align: center;
-}
-
-a {
-  font-weight: bold;
-}
-
-a:link {
-  text-decoration: underline;
 }
 
 .activate-text {
   padding: 10px;
   font-size: 13px;
+}
+
+.activate-text button {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
 }
