@@ -1,61 +1,56 @@
-.Footer1 {
-    background-color: #0067F4;
-    padding: 1%;
-    height: 100%;
+.footer-container {
+  background-color: #0067f4;
+  padding: 40px 0;
+  height: 100%;
 }
 
-.websiteContainer{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+.footer-container a {
+    text-decoration: none !important;
 }
 
-.socialMediaContainer{
-    padding: 20px;
+.footer-row {
+  margin: 0 auto !important;
+  max-width: 1200px;
 }
 
-.footerTextBold{
-    font-size: 1.7vh !important;
-    color: white;
-    margin: 5px;
-    font-weight: bold;
-    line-height: 1.5em;
-    margin-top: 10px;
-    font-family: Poppins;
-}
-a:link{
-    text-decoration: none;
+.footer-social-media-container {
+  padding: 20px;
 }
 
-a:hover{
-    text-decoration: none;
-    color: white
+.footer-website-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.footerText{
-    font-size: 1.5vh !important;
-    color: white;
-    margin: 5px;
-    line-height: 1.5em;
-    font-weight: 300;
-    font-family: Poppins;
+.footer-text-bold {
+  color: white;
+  margin: 5px;
+  font-weight: bold;
+  line-height: 1.5em;
+  margin-top: 10px;
+  font-family: Poppins;
 }
 
-.contactContainer{
-    padding: 20px;
-    flex-direction: column;
-    text-align: right;
-    padding-right: 80px;
-    display: flex;
-    align-items: right; 
+.footer-text {
+  color: white;
+  margin: 5px;
+  line-height: 1.5em;
+  font-weight: 300;
+  font-family: Poppins;
 }
 
-.addressFooter{
-    padding-right: 10vw;
+.footer-contact-container {
+  padding: 20px;
+  flex-direction: column;
+  text-align: right;
+  padding-right: 80px;
+  display: flex;
+  align-items: right;
 }
 
 @media only screen and (max-width: 900px) {
-    .contactContainer {
-        text-align: left;
-    }
+  .contactContainer {
+    text-align: left;
   }
+}
