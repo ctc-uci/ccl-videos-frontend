@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Button } from 'shards-react';
+import { Button, CardColumns, Col, Container, Row } from 'shards-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import LessonModule from './lessonModule';
@@ -26,8 +26,8 @@ const DisplayLessons = () => {
       setIsLoading(false);
       (async () => {
         const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
-        if (res.data !== lessons) {
-          getLessons();
+        if (res.data.length !== lessons.length) {
+          setLessons(res.data);
         }
       })();
     }
@@ -38,6 +38,7 @@ const DisplayLessons = () => {
     () =>
       lessons.map((lesson) => (
         <LessonModule
+          key={lesson.lessonId}
           title={lesson.title}
           thumbnailUrl={lesson.thumbnailUrl}
           className='lessonCard'
@@ -47,16 +48,24 @@ const DisplayLessons = () => {
   );
 
   return (
-    <div>
-      <div className='header'>
-        <h1>Lessons</h1>
-        <Button>
-          <FontAwesomeIcon icon={faPlus} className='plus' />
-          CREATE NEW LESSON
-        </Button>
-      </div>
-      <div className='lessons'>{isLoading ? <h1>LOADING</h1> : lessonList}</div>
-    </div>
+    <Container>
+      <Row className='lessons-header'>
+        <Col>
+          <h1>Lessons</h1>
+        </Col>
+        <Col>
+          <Button>
+            <FontAwesomeIcon icon={faPlus} className='plus' />
+            CREATE NEW LESSON
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div className='lessons'>{isLoading ? <h1>LOADING</h1> : <CardColumns className="lessons-card-columns">{lessonList}</CardColumns>}</div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 
