@@ -2,10 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AdminLogin from 'adminLogin/AdminLogin';
 import Codes from 'codes/Codes';
-import AlertBanner from 'common/AlertBanner';
 import Layout from 'common/Layout';
 import Test from 'Test';
-import Landing from 'Landing';
+import Landing from 'landing/Landing';
 import DisplayLessons from 'displayLessons/displayLessons';
 
 // code unlock area
@@ -25,7 +24,6 @@ function App() {
           <Route exact path='/lessons' component={DisplayLessons}></Route>
         </Layout>
       </Switch>
-      <AlertBanner />
     </Router>
   );
 }
