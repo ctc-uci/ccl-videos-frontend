@@ -9,13 +9,11 @@
   margin: auto;
   width: 90%;
   height: 90vh;
-  /* border: 3px solid #73ad21; */
 }
 
 .mid-section {
   display: flex;
   justify-content: space-between;
-
   margin-top: 2em;
 }
 
