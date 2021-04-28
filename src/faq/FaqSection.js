@@ -1,6 +1,6 @@
 import React from 'react';
-import FaqModule from './faqModule';
-import './faqSection.css'
+import FaqModule from './FaqModule';
+import './FaqSection.css'
 
 const question1 = "What is Albert's real name?"
 const answer1 = "Albert's real name is... Albert"

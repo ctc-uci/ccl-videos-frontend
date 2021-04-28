@@ -1,5 +1,6 @@
 import React from 'react';
 import { InputGroup, InputGroupAddon, FormInput, Button } from 'shards-react';
+import FAQ from 'faq/FaqSection'
 import landingImage from 'images/landing-image.png';
 import 'Landing.css';
 
@@ -21,7 +22,7 @@ const Landing = () => {
         </div>
       </section>
       <section className='faq'>
-        <h1>Frequently Asked Questions</h1>
+        <FAQ></FAQ>
       </section>
       <section>
         <h1>About CCL Lesson Unlocker</h1>
