@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Form, FormInput, FormGroup, Button } from 'shards-react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import config from 'config';
+import AuthService from '../authService/AuthService';
 import './AdminLogin.css';
 
 const AdminLogin = () => {
@@ -11,16 +13,22 @@ const AdminLogin = () => {
   const history = useHistory();
 
   const checkLoginCred = async () => {
-    const loginResponse = await axios.post(
-      'http://localhost:8000/auth/login',
-      {
-        username,
-        password,
-      },
-      { withCredentials: true }
-    );
-    if (loginResponse.status === 200) {
-      history.push('/lessons');
+    try {
+      const loginResponse = await axios.post(
+        `${config.apiURL}/auth/login`,
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      );
+      if (loginResponse.status === 200) {
+        AuthService.authenticate();
+        history.push('/lessons');
+      }
+    }
+    catch(err){
+      alert(err.response.data)
     }
   };
   return (
@@ -42,7 +50,7 @@ const AdminLogin = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormGroup>
-      <Button onClick={checkLoginCred}>Primary</Button>
+      <Button onClick={checkLoginCred}>Login</Button>
     </Form>
   );
 };

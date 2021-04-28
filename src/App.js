@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import AdminRoute from 'adminRoute/AdminRoute';
 import AdminLogin from 'adminLogin/AdminLogin';
 import Codes from 'codes/Codes';
 import AlertBanner from 'common/AlertBanner';
@@ -16,15 +17,15 @@ import DisplayLessons from 'displayLessons/displayLessons';
 function App() {
   return (
     <Router>
-      <Switch>
-        <Layout>
+      <Layout>
+        <Switch>
           <Route exact path='/' component={Landing} />
-          <Route exact path='/codes' component={Codes} />
+          <AdminRoute exact path='/codes' component={Codes} />
           <Route exact path='/test' component={Test}></Route>
-          <Route exact path='/login' component={AdminLogin}></Route>
-          <Route exact path='/lessons' component={DisplayLessons}></Route>
-        </Layout>
-      </Switch>
+          <Route exact path='/login' component={AdminLogin}/>
+          <AdminRoute exact path='/lessons' component={DisplayLessons}/>
+        </Switch>
+      </Layout>
       <AlertBanner />
     </Router>
   );
