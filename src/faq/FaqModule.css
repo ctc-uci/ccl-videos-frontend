@@ -1,14 +1,14 @@
-.faqModule {
+.faq-module {
     width: 100%;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.questionButton {
+.question-button {
     background-color: white;
 }
 
-.buttonContent {
+.button-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
