@@ -3,30 +3,29 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 40px;
-    width: 400px;
-    height: 400px;
+    max-width: 400px;
 }
 
 .thumbnail {
     width: 100%;
-    height: 56.25%;
+    height: 200px;
 }
 
-.videoTitle {
-    font-size: x-large;
+.lesson-videoTitle {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.button {
-    margin: 20px;
-    margin-left: 0px;
-    margin-top: 50px;
+.lesson-module-button {
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
 
-.button #text {
+.lesson-module-button #text {
     margin: 10px;
 }
 
-.icon {
+.lesson-icon {
     margin-right: 5px;
 }

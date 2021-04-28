@@ -58,7 +58,7 @@ function VideoDropzone({ notifyUpload }) {
     <div className={`container ${uploaded ? 'hidden' : ''}`}>
       <div className={dropzoneBox} {...getRootProps()}>
         <input {...getInputProps()} />
-        <img className='icon' src={uploadIcon} alt='Upload Cloud'></img>
+        <img className='video-upload-icon' src={uploadIcon} alt='Upload Cloud'></img>
         <span className='dropzone-text'>Drop File to Upload, or</span>
         <Button onClick={open}>Select Video</Button>
       </div>
