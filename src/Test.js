@@ -7,7 +7,8 @@ import UnlockLessonModal from 'common/UnlockLessonModal';
 import OopsModal from 'common/OopsModal';
 import DisplayLessons from 'displayLessons/displayLessons';
 import AdminLogin from 'adminLogin/AdminLogin';
-import Footer from 'footer/Footer'
+import Footer from 'footer/Footer';
+import FaqSection from 'faq/faqSection';
 
 const DUMMY_DATA = {
   date: new Date(),
@@ -37,6 +38,7 @@ const Test = () => {
       <h1>
         GENERAL TODOS: footer, landing page, code activation, error/success alert banner usage
       </h1>
+      <FaqSection />
       <h2 className='help-text'>
         admin login. TODO: flow is sus and incomplete, need to store isAdmin state in frontend to
         change navbar
