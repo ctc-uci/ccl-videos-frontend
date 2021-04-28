@@ -3,7 +3,6 @@ import VideoPlayer from 'common/VideoPlayer';
 import 'customerVideoPlayer/CustomerVideoPlayer.css';
 
 const CustomerVideoPlayer = ({ url, thumbnail, title, desc, date }) => {
-  console.log({ url, thumbnail, title, desc, date });
   const getDate = (uploadDate) => {
     const dateObj = new Date(uploadDate);
     const month = dateObj.toLocaleDateString(undefined, { month: '2-digit' });

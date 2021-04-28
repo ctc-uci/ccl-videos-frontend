@@ -24,7 +24,7 @@ const UnlockLessonModal = ({ lessonTitle, expirationDate, open, toggle, activati
           </div>
         </ModalHeader>
         <ModalBody>
-          <p className='modal-body'>
+          <div className='modal-body'>
             You are about to activate "{lessonTitle}"<br></br>
             <br></br>
             Once you activate this lesson, it will expire on
@@ -36,7 +36,7 @@ const UnlockLessonModal = ({ lessonTitle, expirationDate, open, toggle, activati
             <br></br>
             <div className='email-text'>Enter a parent's email to receive reminders!</div>
             <FormInput placeholder='Email Address' value={email} onChange={handleInputChange} />
-          </p>
+          </div>
           <div className='modal-button'>
             <Button theme='success' onClick={activationHandler} disabled={!email}>
               Activate Now
