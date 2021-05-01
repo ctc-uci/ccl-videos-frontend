@@ -15,20 +15,19 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background-color: purple;
   margin-top: 2em;
 }
 
 .mid-left {
   display: flex;
   flex-direction: column;
-  flex-basis: 27%;
-  height: 20em;
+  flex-basis: 40%;
+  max-height: 18em;
+  height: 18em;
 }
 
 .mid-right {
-  background-color: aquamarine;
-  flex-basis: 60%;
+  flex-basis: 55%;
   height: 100%;
 }
 
@@ -44,7 +43,7 @@
 .button-group {
   display: inherit;
   justify-content: space-between;
-  flex-basis: 18%;
+  flex-basis: 30%;
 }
 
 .title-section {
@@ -60,4 +59,28 @@ label {
   font-weight: 600;
   font-size: 1.3em;
   color: black;
+}
+
+.vid-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  margin-top: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+#previewer,
+#submitter,
+#replacer,
+#deleter {
+  text-decoration: none;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.external-link-alt {
+  margin-right: 6px;
 }

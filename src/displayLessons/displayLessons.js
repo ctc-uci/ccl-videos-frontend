@@ -12,7 +12,9 @@ const DisplayLessons = () => {
   const [lessons, setLessons] = useState([]);
 
   const getLessons = async () => {
-    const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
+    const res = await axios.get("http://localhost:8000/lessons", {
+      withCredentials: true,
+    });
     console.log(res);
     setLessons(res.data);
     setIsLoading(false);
@@ -41,7 +43,7 @@ const DisplayLessons = () => {
           key={lesson.lessonId}
           title={lesson.title}
           thumbnailUrl={lesson.thumbnailUrl}
-          className='lessonCard'
+          className="lessonCard"
         />
       )),
     [lessons]
