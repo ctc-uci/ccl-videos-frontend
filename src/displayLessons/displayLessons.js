@@ -2,9 +2,10 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Button, CardColumns, Col, Container, Row } from 'shards-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import LessonModule from './lessonModule';
+import LessonModule from 'displayLessons/lessonModule';
 import axios from 'axios';
-import './displayLessons.css';
+import config from 'config';
+import 'displayLessons/displayLessons.css';
 
 // TODO: fix urls to come from config
 const DisplayLessons = () => {
@@ -12,7 +13,7 @@ const DisplayLessons = () => {
   const [lessons, setLessons] = useState([]);
 
   const getLessons = async () => {
-    const res = await axios.get("http://localhost:8000/lessons", {
+    const res = await axios.get(`${config.apiURL}/lessons`, {
       withCredentials: true,
     });
     console.log(res);
@@ -27,7 +28,7 @@ const DisplayLessons = () => {
     } else {
       setIsLoading(false);
       (async () => {
-        const res = await axios.get('http://localhost:8000/lessons', { withCredentials: true });
+        const res = await axios.get(`${config.apiURL}/lessons`, { withCredentials: true });
         if (res.data.length !== lessons.length) {
           setLessons(res.data);
         }

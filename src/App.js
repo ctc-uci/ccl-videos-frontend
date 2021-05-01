@@ -4,28 +4,30 @@ import AdminRoute from 'adminRoute/AdminRoute';
 import AdminLogin from 'adminLogin/AdminLogin';
 import Codes from 'codes/Codes';
 import AlertBanner from 'common/AlertBanner';
-import Layout from 'common/Layout';
 import Test from 'Test';
 import Landing from 'Landing';
 import DisplayLessons from 'displayLessons/displayLessons';
-
-// code unlock area
-// use modals for stuff
-// admin login flow
-// connect lesson modules => edit lesson flow
+import AdminLayout from 'common/AdminLayout';
+import Layout from 'common/Layout';
 
 function App() {
   return (
     <Router>
-      <Layout>
-        <Switch>
-          <Route exact path='/' component={Landing} />
-          <AdminRoute exact path='/codes' component={Codes} />
-          <Route exact path='/test' component={Test}></Route>
-          <Route exact path='/login' component={AdminLogin}/>
-          <AdminRoute exact path='/lessons' component={DisplayLessons}/>
-        </Switch>
-      </Layout>
+      <Switch>
+        <Route exact path={['/', '/login', '/test']}>
+          <Layout>
+            <Route exact path='/' component={Landing} />
+            <Route exact path='/test' component={Test}></Route>
+            <Route exact path='/login' component={AdminLogin} />
+          </Layout>
+        </Route>
+        <Route exact path={['/codes', '/lessons']}>
+          <AdminLayout>
+            <AdminRoute exact path='/codes' component={Codes} />
+            <AdminRoute exact path='/lessons' component={DisplayLessons} />
+          </AdminLayout>
+        </Route>
+      </Switch>
       <AlertBanner />
     </Router>
   );
