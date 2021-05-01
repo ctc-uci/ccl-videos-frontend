@@ -1,16 +1,18 @@
 import React from 'react';
-import CustomerNavbar from 'navbar/CustomerNavbar';
+import AdminNavbar from 'navbar/AdminNavbar';
 import Footer from 'footer/Footer';
 import 'common/Layout.css';
 
-const Layout = ({ children }) => {
+const isAdmin = false;
+
+const AdminLayout = ({ children }) => {
   return (
     <div className='main-container'>
-      <CustomerNavbar />
+      <AdminNavbar />
       <div className='body-container'>{children}</div>
       <Footer />
     </div>
   );
 };
 
-export default Layout;
+export default AdminLayout;

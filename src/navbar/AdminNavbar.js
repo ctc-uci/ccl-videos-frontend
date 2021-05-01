@@ -11,10 +11,10 @@ function AppNavbar() {
       </NavbarBrand>
       <Nav navbar className='m-auto nav-links'>
         <NavItem>
-          <NavLink href='/watch'>Lessons</NavLink>
+          <NavLink href='/lessons'>Lessons</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href='/read'>Codes</NavLink>
+          <NavLink href='/codes'>Codes</NavLink>
         </NavItem>
       </Nav>
     </Navbar>
