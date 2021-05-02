@@ -1,8 +1,8 @@
 import React from 'react';
-import { InputGroup, InputGroupAddon, FormInput, Button } from 'shards-react';
 import FAQ from 'faq/FaqSection'
 import landingImage from 'images/landing-image.png';
-import 'Landing.css';
+import 'landing/Landing.css';
+import CodeUnlock from 'landing/CodeUnlock';
 
 const Landing = () => {
   return (
@@ -11,12 +11,7 @@ const Landing = () => {
         <div className='landing-header-container'>
           <div className='landing-header-input-container'>
             <h1 className='landing-header-input-text'>Enter your code to unlock a lesson!</h1>
-            <InputGroup className='landing-header-input'>
-              <FormInput placeholder='ABCDEFG' />
-              <InputGroupAddon type='append'>
-                <Button theme='success'>Start</Button>
-              </InputGroupAddon>
-            </InputGroup>
+            <CodeUnlock />
           </div>
           <img src={landingImage} alt='' />
         </div>

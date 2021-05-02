@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import VideoPlayer from 'common/VideoPlayer';
 import 'customerVideoPlayer/CustomerVideoPlayer.css';
 
-const LessonVideo = ({ url, thumbnail, title, desc, date }) => {
+const CustomerVideoPlayer = ({ url, thumbnail, title, desc, date }) => {
   const getDate = (uploadDate) => {
     const dateObj = new Date(uploadDate);
     const month = dateObj.toLocaleDateString(undefined, { month: '2-digit' });
@@ -13,17 +13,13 @@ const LessonVideo = ({ url, thumbnail, title, desc, date }) => {
   };
 
   return (
-    <div style={{ height: "inherit" }} className="lesson-page">
-      {url ? (
-        <VideoPlayer url={url} thumbnail={thumbnail}/>
-      ) : (
-        <p>No video has been uploaded</p>
-      )}
-      <p className="expiration-date">Expiration Date: {getDate(date)}</p>
+    <div style={{ height: 'inherit' }} className='lesson-page'>
+      {url ? <VideoPlayer url={url} thumbnail={thumbnail} /> : <p>No video has been uploaded</p>}
+      <p className='expiration-date'>Expiration Date: {getDate(date)}</p>
       <h1>{title}</h1>
       <p>{desc}</p>
     </div>
   );
 };
 
-export default LessonVideo;
+export default CustomerVideoPlayer;

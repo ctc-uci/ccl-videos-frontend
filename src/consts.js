@@ -12,4 +12,7 @@ module.exports = {
       WEEKS: ['weeks', 60*60*24*7],
       MONTHS: ['months', 60*60*24*30],
     },
+    ACTIVE: 'ACTIVE',
+    INACTIVE: 'INACTIVE',
+    EXPIRED: 'EXPIRED'
 }

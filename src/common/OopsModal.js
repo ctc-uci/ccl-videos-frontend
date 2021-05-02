@@ -14,7 +14,7 @@ const OopsModal = ({ open, toggle }) => {
             <button
               onClick={toggle}
               type='button'
-              class='close'
+              className='close'
               data-dismiss='modal'
               aria-label='Close'>
               <span aria-hidden='true'>&times;</span>

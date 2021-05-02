@@ -1,5 +1,5 @@
 import React from "react";
-import VideoPlayer from "customerVideoPlayer/VideoPlayer";
+import VideoPlayer from "customerVideoPlayer/CustomerVideoPlayer";
 import CreateLesson from "lessonManager/CreateLesson";
 import EditLesson from "lessonManager/EditLesson";
 import { useState } from "react";
