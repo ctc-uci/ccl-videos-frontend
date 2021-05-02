@@ -17,7 +17,7 @@ const Previewer = () => {
         Close
       </Button>
       <div>
-        {url ? <VideoPlayer url={decodeURIComponent(url)}></VideoPlayer> : <p>No Video Uploaded</p>}
+        {url ? <VideoPlayer src={decodeURIComponent(url)}></VideoPlayer> : <p>No Video Uploaded</p>}
       </div>
       <div>
         <h2>{title ? title : 'Empty Title'}</h2>
