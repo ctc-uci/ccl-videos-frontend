@@ -1,181 +1,150 @@
-import React, { useState } from "react";
-import { apiURL, bucket } from "../config";
-import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
-import { useHistory } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExternalLinkAlt } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import VideoPlayer from "common/VideoPlayer";
-import ConfirmModal from "lessonManager/ConfirmModal";
-import VideoDropzone from "lessonManager/VideoDropzone";
-import "lessonManager/EditLesson.css";
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Form, FormInput, FormGroup, FormTextarea, Button } from 'shards-react';
+import { useHistory } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { createAlert } from 'common/AlertBannerSlice';
+import config from 'config';
+import axios from 'axios';
+import VideoPlayer from 'common/VideoPlayer';
+import ConfirmModal from 'lessonManager/ConfirmModal';
+import VideoUploader from 'lessonManager/VideoUploader';
+import 'lessonManager/EditLesson.css';
 
-const EditLesson = ({ id, title, description, video }) => {
-  const [videoTitle, setVideoTitle] = useState(title);
-  const [videoDescription, setVideoDecription] = useState(description);
-  const [videoURL, setVideoURL] = useState(video);
-  const [videoFile, setVideoFile] = useState(null);
+const EditLesson = () => {
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [videoURL, setVideoURL] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
-  let history = useHistory();
+  const [playerVisible, setPlayerVisible] = useState(true);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { id } = useParams();
 
-  function redirect() {
-    history.goBack();
-  }
+  const getLesson = async () => {
+    const res = await axios.get(`${config.apiURL}/lessons/${id}`);
+    const { title, description, videoUrl } = res.data;
+    setTitle(title);
+    setDescription(description);
+    setVideoURL(videoUrl);
+  };
 
-  function onDelete() {
+  useEffect(() => {
+    getLesson();
+  });
+
+  const onDelete = () => {
     setShowConfirmation(true);
-  }
-
-  function notifyUpload(file) {
-    let videoFileURL = URL.createObjectURL(file[0]);
-    setVideoURL(videoFileURL);
-    setVideoFile(file[0]);
-    console.log("videoFileURL", videoURL);
-  }
-
-  const getUploadURL = async () => {
-    try {
-      let uploadConfig = { ID: id, contentType: "video/mp4", bucket: bucket };
-      const res = await axios.post(`${apiURL}/s3/`, uploadConfig);
-      console.log("getUploadURL", res);
-      return res.data.uploadURL;
-    } catch (err) {
-      console.log(err);
-    }
   };
 
-  const uploadVideo = async (link) => {
+  const handleSetVideoUrl = (videoURL) => {
+    setVideoURL(videoURL);
+  };
+
+  const renderPlayer = () => {
+    setPlayerVisible(true);
+  };
+
+  const hidePlayer = () => {
+    setPlayerVisible(false);
+  };
+
+  const redirectToLessons = () => {
+    history.push('/lessons');
+  }
+
+  const saveEdits = async (e) => {
+    e.preventDefault();
     try {
-      console.log(videoFile);
-      const res = await axios.put(link, videoFile, {
-        headers: {
-          "Content-Type": "video/mp4",
-        },
+      const res = await axios.post(`${config.apiURL}/lessons/${id}`, {
+        title,
+        description,
+        videoUrl: videoURL,
       });
-      console.log("uploadVideo res", res);
-      var url = res.config.url.split("?")[0];
-      return url;
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  async function onSubmit() {
-    let vidLink = videoURL;
-    if (videoFile) {
-      try {
-        const uploadUrl = await getUploadURL();
-        vidLink = await uploadVideo(uploadUrl);
-        console.log("vidLinK", vidLink);
-      } catch (err) {
-        console.log(err);
+      if (res.status === 200) {
+        dispatch(
+          createAlert({ theme: 'success', message: `Lesson ${title} updated successfully.` })
+        );
       }
-    }
-
-    try {
-      let newLesson = {
-        lessonId: id,
-        title: videoTitle,
-        description: videoDescription,
-        videoUrl: vidLink,
-      };
-      console.log("newLesson", newLesson);
-      await axios.patch(`${apiURL}/lessons/${id}`, newLesson, {
-        withCredentials: true,
-      });
-      // redirect();
+      redirectToLessons();
     } catch (err) {
-      console.log(err);
+      dispatch(createAlert({ theme: 'danger', message: `Error: ${err}` }));
     }
+  };
+
+  const preview = () => {
+    history.push(`/lessons/preview/${id}`)
   }
 
   return (
     <div>
-      <Form className="whole-page">
-        <div className="header-section">
-          <h1 className="lesson-title">Edit Lesson</h1>
-          <Button
-            id="previewer"
-            href={`/previewLesson/${videoTitle}/${videoDescription}/${encodeURIComponent(
-              videoURL
-            )}`}
-            target="_blank"
-          >
-            <FontAwesomeIcon
-              icon={faExternalLinkAlt}
-              className="external-link-alt"
-            />
+      <Form className='whole-page'>
+        <div className='header-section'>
+          <h1 className='lesson-title'>Edit Lesson</h1>
+          <Button onClick={preview}>
+            <FontAwesomeIcon icon={faExternalLinkAlt} className='external-link-alt' />
             Preview Lesson
           </Button>
         </div>
-        <div className="mid-section">
-          <div className="mid-left">
-            <VideoPlayer url={videoURL}></VideoPlayer>
-
-            <VideoDropzone
-              notifyUpload={notifyUpload}
-              isVideo={true}
-            ></VideoDropzone>
+        <div className='mid-section'>
+          <div className='mid-left'>
+            {playerVisible ? <VideoPlayer src={videoURL}></VideoPlayer> : null}
+            <VideoUploader
+              handleOnPrepare={hidePlayer}
+              handleSubmit={renderPlayer}
+              handleSetVideoURL={handleSetVideoUrl}></VideoUploader>
           </div>
-          <div className="mid-right">
+          <div className='mid-right'>
             <FormGroup>
-              <div className="title-section">
-                <label htmlFor="title">Title</label>
+              <div className='title-section'>
+                <label htmlFor='title'>Title</label>
                 <FormInput
                   required
-                  value={videoTitle}
-                  id="title"
-                  placeholder="Enter Title Here"
+                  value={title}
+                  id='title'
+                  placeholder='Enter Title Here'
                   onChange={(e) => {
-                    setVideoTitle(e.target.value);
+                    setTitle(e.target.value);
                   }}
                 />
               </div>
-              <div className="description-sectio>">
-                <label htmlFor="description">Description</label>
+              <div className='description-sectio>'>
+                <label htmlFor='description'>Description</label>
                 <FormTextarea
                   required
-                  value={videoDescription}
-                  id="description"
-                  placeholder="Enter Description Here"
+                  value={description}
+                  id='description'
+                  placeholder='Enter Description Here'
                   onChange={(e) => {
-                    setVideoDecription(e.target.value);
+                    setDescription(e.target.value);
                   }}
                 />
               </div>
             </FormGroup>
           </div>
         </div>
-        <div className="bottom">
-          <div className="delete">
-            {" "}
-            <Button id="deleter" theme="danger" onClick={onDelete}>
+        <div className='bottom'>
+          <div className='delete'>
+            <Button id='deleter' theme='danger' onClick={onDelete}>
               Delete Lesson
             </Button>
           </div>
-          <div className="button-group">
-            <Button outline pill onClick={redirect}>
+          <div className='button-group'>
+            <Button outline pill onClick={redirectToLessons}>
               Cancel
             </Button>
-            <Button
-              pill
-              id="submitter"
-              type="Submit"
-              onClick={(e) => {
-                e.preventDefault();
-                onSubmit();
-              }}
-            >
+            <Button pill id='submitter' type='Submit' onClick={saveEdits}>
               Save Edits
             </Button>
           </div>
         </div>
         <ConfirmModal
           id={id}
-          extension={"mp4"}
+          extension={'mp4'}
           isOpen={showConfirmation}
-          toggler={setShowConfirmation}
-        ></ConfirmModal>
+          toggler={setShowConfirmation}></ConfirmModal>
       </Form>
     </div>
   );

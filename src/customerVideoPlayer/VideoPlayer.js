@@ -2,7 +2,7 @@ import React from "react";
 import VideoPlayer from 'common/VideoPlayer';
 import 'customerVideoPlayer/CustomerVideoPlayer.css';
 
-const LessonVideo = ({ url, thumbnail, title, desc, date }) => {
+const LessonVideo = ({ url, thumbnail, title, desc, date=Date() }) => {
   const getDate = (uploadDate) => {
     const dateObj = new Date(uploadDate);
     const month = dateObj.toLocaleDateString(undefined, { month: '2-digit' });
@@ -15,7 +15,7 @@ const LessonVideo = ({ url, thumbnail, title, desc, date }) => {
   return (
     <div style={{ height: "inherit" }} className="lesson-page">
       {url ? (
-        <VideoPlayer url={url} thumbnail={thumbnail}/>
+        <VideoPlayer src={url}/>
       ) : (
         <p>No video has been uploaded</p>
       )}

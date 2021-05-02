@@ -4,6 +4,8 @@ import { Button, Modal, ModalBody } from "shards-react";
 import { apiURL, bucket } from "config";
 import "./ConfirmModal.css";
 
+// TODO: Show alert banners for success/fail
+
 const ConfirmModal = ({ id, extension, isOpen, toggler }) => {
   async function deleteLesson() {
     try {

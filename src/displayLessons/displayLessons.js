@@ -2,21 +2,26 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Button, CardColumns, Col, Container, Row } from 'shards-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useHistory } from 'react-router-dom';
 import LessonModule from 'displayLessons/lessonModule';
 import axios from 'axios';
 import config from 'config';
 import 'displayLessons/displayLessons.css';
 
-// TODO: fix urls to come from config
+// TODO: fix urls to come from config / cosntants
 const DisplayLessons = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [lessons, setLessons] = useState([]);
+  const history = useHistory();
+
+  const redirectToCreate = () => {
+    history.push('/lessons/create');
+  };
 
   const getLessons = async () => {
     const res = await axios.get(`${config.apiURL}/lessons`, {
       withCredentials: true,
     });
-    console.log(res);
     setLessons(res.data);
     setIsLoading(false);
   };
@@ -25,16 +30,7 @@ const DisplayLessons = () => {
   useEffect(() => {
     if (lessons.length === 0) {
       getLessons();
-    } else {
-      setIsLoading(false);
-      (async () => {
-        const res = await axios.get(`${config.apiURL}/lessons`, { withCredentials: true });
-        if (res.data.length !== lessons.length) {
-          setLessons(res.data);
-        }
-      })();
     }
-    return () => true;
   }, [lessons]);
 
   const lessonList = useMemo(
@@ -42,9 +38,10 @@ const DisplayLessons = () => {
       lessons.map((lesson) => (
         <LessonModule
           key={lesson.lessonId}
+          id={lesson.lessonId}
           title={lesson.title}
           thumbnailUrl={lesson.thumbnailUrl}
-          className="lessonCard"
+          className='lessonCard'
         />
       )),
     [lessons]
@@ -57,15 +54,21 @@ const DisplayLessons = () => {
           <h1>Lessons</h1>
         </Col>
         <Col>
-          <Button>
+          <Button onClick={redirectToCreate}>
             <FontAwesomeIcon icon={faPlus} className='plus' />
-            CREATE NEW LESSON
+            Create New Lesson
           </Button>
         </Col>
       </Row>
       <Row>
         <Col>
-          <div className='lessons'>{isLoading ? <h1>LOADING</h1> : <CardColumns className="lessons-card-columns">{lessonList}</CardColumns>}</div>
+          <div className='lessons'>
+            {isLoading ? (
+              <h1>LOADING</h1>
+            ) : (
+              <CardColumns className='lessons-card-columns'>{lessonList}</CardColumns>
+            )}
+          </div>
         </Col>
       </Row>
     </Container>
