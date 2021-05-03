@@ -4,13 +4,19 @@
   margin-top: 25px;
   margin-bottom: 20px;
 }
+
 .lesson-page {
   display: flex;
   flex-direction: column;
   width: 75%;
   margin: 0 auto;
 }
-.expiration-date {
+
+.customer-video-text-container {
+  text-align: left;
+}
+
+.customer-video-expiration-date {
   color: red;
   margin-bottom: 5px;
 }
