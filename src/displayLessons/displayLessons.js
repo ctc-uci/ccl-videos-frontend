@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
 import LessonModule from 'displayLessons/lessonModule';
+import Spinner from 'common/Spinner';
 import axios from 'axios';
 import config from 'config';
 import 'displayLessons/displayLessons.css';
@@ -64,7 +65,7 @@ const DisplayLessons = () => {
         <Col>
           <div className='lessons'>
             {isLoading ? (
-              <h1>LOADING</h1>
+              <Spinner />
             ) : (
               <CardColumns className='lessons-card-columns'>{lessonList}</CardColumns>
             )}
