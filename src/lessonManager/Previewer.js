@@ -22,13 +22,15 @@ const Previewer = () => {
   useEffect(() => {
     console.log('hi');
     getLesson();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <div>
-      <VideoPlayer url={url} title={title} description={description}></VideoPlayer>
+      <VideoPlayer url={url} title={title} desc={description}></VideoPlayer>
     </div>
   );
 };
 
 export default Previewer;
+

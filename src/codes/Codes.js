@@ -19,6 +19,7 @@ import GenerateCodesModal from 'codes/GenerateCodesModal';
 import Spinner from 'common/Spinner';
 import 'codes/Codes.css';
 
+// TODO: email filter and limit input fields
 const Codes = () => {
   const [lessons, setLessons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

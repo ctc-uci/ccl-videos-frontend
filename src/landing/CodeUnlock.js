@@ -37,6 +37,7 @@ const CodeUnlock = () => {
       console.log('states have been set');
       processActivation();
     }
+    // eslint-disable-next-line
   }, [lessonTitle, lessonDescription, lessonVideoUrl, lessonThumbnailUrl]);
 
   const handleInputChange = (event) => {
