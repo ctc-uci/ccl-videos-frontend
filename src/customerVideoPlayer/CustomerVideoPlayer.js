@@ -3,6 +3,7 @@ import VideoPlayer from 'common/VideoPlayer';
 import 'customerVideoPlayer/CustomerVideoPlayer.css';
 
 const CustomerVideoPlayer = ({ url, thumbnail, title, desc, date }) => {
+  // FIXME: THis is wrong date
   const getDate = (uploadDate) => {
     const dateObj = new Date(uploadDate);
     const month = dateObj.toLocaleDateString(undefined, { month: '2-digit' });
@@ -14,7 +15,7 @@ const CustomerVideoPlayer = ({ url, thumbnail, title, desc, date }) => {
 
   return (
     <div style={{ height: 'inherit' }} className='lesson-page'>
-      {url ? <VideoPlayer url={url} thumbnail={thumbnail} /> : <p>No video has been uploaded</p>}
+      {url ? <VideoPlayer src={url} thumbnail={thumbnail} /> : <p>No video has been uploaded</p>}
       <p className='expiration-date'>Expiration Date: {getDate(date)}</p>
       <h1>{title}</h1>
       <p>{desc}</p>

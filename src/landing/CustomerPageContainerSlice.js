@@ -7,6 +7,7 @@ export const CustomerPageContainerSlice = createSlice({
   },
   reducers: {
     setVideoData: (state, action) => {
+      console.log('dispached')
       state.videoData = action.payload;
     },
   },

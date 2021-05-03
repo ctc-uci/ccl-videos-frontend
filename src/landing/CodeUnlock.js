@@ -31,10 +31,13 @@ const CodeUnlock = () => {
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    if (lessonTitle && lessonDescription && lessonVideoUrl && lessonThumbnailUrl) {
+    console.log('called');
+    console.log([lessonTitle, lessonDescription, lessonVideoUrl, lessonThumbnailUrl]);
+    if (lessonTitle && lessonDescription && lessonVideoUrl) {
+      console.log('states have been set');
       processActivation();
     }
-  });
+  }, [lessonTitle, lessonDescription, lessonVideoUrl, lessonThumbnailUrl]);
 
   const handleInputChange = (event) => {
     const upper = event.target.value.toUpperCase();
@@ -78,6 +81,7 @@ const CodeUnlock = () => {
         } else if (isCodeInactive(status)) {
           toggleModal();
         } else if (isCodeActive(status)) {
+          console.log('code active');
           unlockLesson();
         }
       }
@@ -95,6 +99,7 @@ const CodeUnlock = () => {
     try {
       const response = await axios.post(`${config.apiURL}/codes/${code}/redeem`);
       if (response.status === 200) {
+        console.log(response);
         const { lesson, expirationDate } = response.data;
         const { description, thumbnailUrl, videoUrl, title } = lesson;
         setLessonDescription(description);
@@ -102,6 +107,7 @@ const CodeUnlock = () => {
         setLessonThumbnailUrl(thumbnailUrl);
         setLessonTitle(title);
         setLessonVideoUrl(videoUrl);
+        console.log('after state sets called')
       }
     } catch (err) {
       if (err.response.status && err.response.status === 401) {
@@ -113,6 +119,7 @@ const CodeUnlock = () => {
   };
 
   const processActivation = () => {
+    console.log('processing activation')
     dispatch(
       setVideoData({
         url: lessonVideoUrl,
