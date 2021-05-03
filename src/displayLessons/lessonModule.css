@@ -1,9 +1,10 @@
 .lessonModule {
-    border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     max-width: 400px;
+    border: 1px solid #e8e8e8 !important;
+    box-shadow: none !important;
 }
 
 .thumbnail {
