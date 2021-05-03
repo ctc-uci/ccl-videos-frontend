@@ -26,7 +26,7 @@ const GenerateCodesModal = (props) => {
   const [generateCodesLesson, setGenerateCodesLesson] = useState();
   const [generateCodesExpiration, setGenerateCodesExpiration] = useState(2);
   const [generateCodesExpirationUnit, setGenerateCodesExpirationUnit] = useState('DAYS');
-  const [generateCodesCount, setGenerateCodesCount] = useState(5);
+  const [generateCodesCount, setGenerateCodesCount] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedCodes, setGeneratedCodes] = useState();
   const [copyButtonText, setCopyButtonText] = useState('Copy codes to clipboard');
@@ -78,7 +78,7 @@ const GenerateCodesModal = (props) => {
             <FormGroup>
               <label htmlFor='generateCodesExpiration'>Expiration</label>
               <InputGroup>
-                <FormInput id='generateCodesExpiration' value={generateCodesExpiration} type='number' onChange={e => setGenerateCodesExpiration(e.target.value)}></FormInput>
+                <FormInput id='generateCodesExpiration' value={generateCodesExpiration} type='number' onChange={e => setGenerateCodesExpiration(Math.min(Math.max(1, e.target.value), 30))}></FormInput>
                 <FormSelect id='generateCodesExpirationUnit' onChange={e => setGenerateCodesExpirationUnit(e.target.value)}>
                   { Object.keys(DURATION_UNITS).map((unit) => (
                   <option value={unit} key={unit}>{DURATION_UNITS[unit][0]}</option>
@@ -91,7 +91,7 @@ const GenerateCodesModal = (props) => {
             </FormGroup>
             <FormGroup>
               <label htmlFor='generateCodesCount'>Number of Codes</label>
-              <FormInput id='generateCodesCount' value={generateCodesCount} type='number' onChange={e => setGenerateCodesCount(e.target.value)}></FormInput>
+              <FormInput id='generateCodesCount' value={generateCodesCount} type='number' onChange={e => setGenerateCodesCount(Math.min(Math.max(1, e.target.value), 5))}></FormInput>
             </FormGroup>
             <Button
               type='submit'

@@ -33,6 +33,7 @@ const EditLesson = () => {
 
   useEffect(() => {
     getLesson();
+    // eslint-disable-next-line
   }, []);
 
   const onDelete = () => {
@@ -90,7 +91,7 @@ const EditLesson = () => {
         </div>
         <div className='mid-section'>
           <div className='mid-left'>
-            {playerVisible ? <VideoPlayer src={videoURL}></VideoPlayer> : null}
+            {playerVisible && videoURL? <VideoPlayer src={videoURL}></VideoPlayer> : null}
             <VideoUploader
               handleOnPrepare={hidePlayer}
               handleSubmit={renderPlayer}

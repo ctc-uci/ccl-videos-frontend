@@ -8,7 +8,6 @@ const usePlayer = ({ src, controls, autoplay }) => {
     // fill: true,
     aspectRatio: '16:9',
     responsive: true,
-    width: '50px',
     preload: 'auto',
     html5: {
       hls: {
