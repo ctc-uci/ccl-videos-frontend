@@ -5,8 +5,10 @@ import 'video.js/dist/video-js.css';
 
 const usePlayer = ({ src, controls, autoplay }) => {
   const options = {
-    fill: true,
-    fluid: true,
+    // fill: true,
+    aspectRatio: '16:9',
+    responsive: true,
+    width: '50px',
     preload: 'auto',
     html5: {
       hls: {
