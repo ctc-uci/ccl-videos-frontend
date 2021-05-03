@@ -1,33 +1,34 @@
-import React from 'react';
-import { useParams, withRouter } from 'react-router-dom';
-import { Button } from 'shards-react';
-import VideoPlayer from 'common/VideoPlayer';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import VideoPlayer from 'customerVideoPlayer/CustomerVideoPlayer';
+import axios from 'axios';
+import config from 'config';
 
 const Previewer = () => {
-  const { title, description, url } = useParams();
-  console.log(!title, description, url);
+  const { id } = useParams();
+  const [url, setUrl] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+
+  const getLesson = async () => {
+    const res = await axios.get(`${config.apiURL}/lessons/${id}`);
+    console.log(res);
+    const { title, description, videoUrl } = res.data;
+    setTitle(title);
+    setUrl(videoUrl);
+    setDescription(description);
+  };
+
+  useEffect(() => {
+    console.log('hi');
+    getLesson();
+  }, []);
+
   return (
     <div>
-      <Button
-        pill
-        theme='danger'
-        onClick={() => {
-          window.close();
-        }}>
-        Close
-      </Button>
-      <div>
-        {url ? <VideoPlayer src={decodeURIComponent(url)}></VideoPlayer> : <p>No Video Uploaded</p>}
-      </div>
-      <div>
-        <h2>{title ? title : 'Empty Title'}</h2>
-      </div>
-      <div>
-        <h5>Description</h5>
-        <p>{description ? description : 'Empty Description'}</p>
-      </div>
+      <VideoPlayer url={url} title={title} description={description}></VideoPlayer>
     </div>
   );
 };
 
-export default withRouter(Previewer);
+export default Previewer;

@@ -3,9 +3,12 @@ import VideoPlayer from 'common/VideoPlayer';
 import 'customerVideoPlayer/CustomerVideoPlayer.css';
 
 const CustomerVideoPlayer = ({ url, thumbnail, title, desc, date }) => {
-  // FIXME: THis is wrong date
-  const getDate = (uploadDate) => {
-    const dateObj = new Date(uploadDate);
+  const getDate = (date) => {
+    // date is null when used in previewer
+    if (!date) {
+      return new Date().toDateString();
+    }
+    const dateObj = new Date(date);
     const month = dateObj.toLocaleDateString(undefined, { month: '2-digit' });
     const day = dateObj.toLocaleDateString(undefined, { day: '2-digit' });
     const year = dateObj.toLocaleDateString(undefined, { year: '2-digit' });
@@ -14,11 +17,13 @@ const CustomerVideoPlayer = ({ url, thumbnail, title, desc, date }) => {
   };
 
   return (
-    <div style={{ height: 'inherit' }} className='lesson-page'>
+    <div className='lesson-page'>
       {url ? <VideoPlayer src={url} thumbnail={thumbnail} /> : <p>No video has been uploaded</p>}
-      <p className='expiration-date'>Expiration Date: {getDate(date)}</p>
-      <h1>{title}</h1>
-      <p>{desc}</p>
+      <div className='customer-video-text-container'>
+        <p className='customer-video-expiration-date'>Expiration Date: {getDate(date)}</p>
+        <h1>{title}</h1>
+        <p>{desc}</p>
+      </div>
     </div>
   );
 };

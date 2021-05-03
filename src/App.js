@@ -10,7 +10,7 @@ import AdminLayout from 'common/AdminLayout';
 import Layout from 'common/Layout';
 import CreateLesson from 'lessonManager/CreateLesson';
 import EditLesson from 'lessonManager/EditLesson';
-import Previewer from 'Previewer';
+import Previewer from 'lessonManager/Previewer';
 
 function App() {
   return (
@@ -23,7 +23,15 @@ function App() {
             <Route exact path='/login' component={AdminLogin} />
           </Layout>
         </Route>
-        <Route exact path={['/codes', '/lessons', '/lessons/create', '/lessons/edit/:id', '/lessons/preview/:id']}>
+        <Route
+          exact
+          path={[
+            '/codes',
+            '/lessons',
+            '/lessons/create',
+            '/lessons/edit/:id',
+            '/lessons/preview/:id',
+          ]}>
           <AdminLayout>
             <AdminRoute exact path='/codes' component={Codes} />
             <AdminRoute exact path='/lessons' component={DisplayLessons} />
@@ -31,6 +39,11 @@ function App() {
             <AdminRoute path='/lessons/edit/:id' component={EditLesson} />
             <AdminRoute path='/lessons/preview/:id' component={Previewer} />
           </AdminLayout>
+        </Route>
+        <Route path='*'>
+          <h2>
+            404: Page not found. Please try going back and double checking that the url is valid.
+          </h2>
         </Route>
       </Switch>
     </Router>

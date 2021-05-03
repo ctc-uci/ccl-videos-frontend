@@ -33,7 +33,7 @@ const EditLesson = () => {
 
   useEffect(() => {
     getLesson();
-  });
+  }, []);
 
   const onDelete = () => {
     setShowConfirmation(true);

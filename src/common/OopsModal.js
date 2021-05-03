@@ -22,7 +22,7 @@ const OopsModal = ({ open, toggle }) => {
           </div>
         </ModalHeader>
         <ModalBody>
-          <p>
+          <p className="oops-modal-body">
             This is not a valid code. Please make sure that you typed in your<br></br>
             code exactly as it appears in your kit. If the issue persists,<br></br>
             please contact us at:
