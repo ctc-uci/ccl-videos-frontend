@@ -76,9 +76,12 @@ const CodeUnlock = () => {
       const response = await axios.get(`${config.apiURL}/codes/${code}`);
       if (response.status === 200) {
         const { status } = response.data.code;
+        const { title, predicatedExpirationDate } = response.data;
         if (isCodeExpired(status)) {
           displayDynamicErrorAlert('Code is expired!');
         } else if (isCodeInactive(status)) {
+          setLessonExpirationDate(predicatedExpirationDate);
+          setLessonTitle(title);
           toggleModal();
         } else if (isCodeActive(status)) {
           console.log('code active');
