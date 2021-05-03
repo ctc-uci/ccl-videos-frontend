@@ -16,6 +16,7 @@ import config from 'config';
 import { CODE_STATUS_VALUES, CODE_STATUS_CHECKBOXES } from 'consts';
 import ClickToCopy from 'common/ClickToCopy';
 import GenerateCodesModal from 'codes/GenerateCodesModal';
+import Spinner from 'common/Spinner';
 import 'codes/Codes.css';
 
 const Codes = () => {
@@ -24,18 +25,23 @@ const Codes = () => {
   const [isModalOpen, toggleModal] = useReducer((val) => !val, false);
 
   // states for filter inputs
-  const lessonTitles = useMemo(() => (
-    lessons.reduce((obj, lesson) => {
-      obj[lesson.lessonId] = lesson.title;
-      return obj;
-    }, {})
-  ), [lessons]);
+  const lessonTitles = useMemo(
+    () =>
+      lessons.reduce((obj, lesson) => {
+        obj[lesson.lessonId] = lesson.title;
+        return obj;
+      }, {}),
+    [lessons]
+  );
   const [lessonFilter, setLessonFilter] = useState('ALL');
-  const [statusFilter, toggleStatusFilter] = useReducer((current, numCheckbox) => {
-    let flags = [...current];
-    flags[numCheckbox] = !flags[numCheckbox];
-    return flags;
-  }, [true, true, true]);
+  const [statusFilter, toggleStatusFilter] = useReducer(
+    (current, numCheckbox) => {
+      let flags = [...current];
+      flags[numCheckbox] = !flags[numCheckbox];
+      return flags;
+    },
+    [true, true, true]
+  );
   const [searchFilter, setSearchFilter] = useState('');
 
   // fetch lessons
@@ -54,42 +60,53 @@ const Codes = () => {
     document.body.classList.add('force-scrollbar');
     return () => {
       document.body.classList.remove('force-scrollbar');
-    }
+    };
   }, []);
 
   // extract and filter all the codes
-  const codes = useMemo(() => (
-    [].concat(...lessons.map((lesson) => (
-      lesson.codes.map((code) => (
-        {
-          lesson: lesson.title,
-          lessonId: lesson.lessonId,
-          ...code
-        }
-      ))
-    )))
-  ), [lessons]);
+  const codes = useMemo(
+    () =>
+      [].concat(
+        ...lessons.map((lesson) =>
+          lesson.codes.map((code) => ({
+            lesson: lesson.title,
+            lessonId: lesson.lessonId,
+            ...code,
+          }))
+        )
+      ),
+    [lessons]
+  );
 
-  const filteredCodes = useMemo(() => (
-    codes.filter((code) => (
-      (lessonFilter === 'ALL' || lessonFilter === code.lessonId)
-      && statusFilter[CODE_STATUS_CHECKBOXES.indexOf(code.status)]
-      && (searchFilter === '' ||
-      (code.code.startsWith(searchFilter.toUpperCase())
-      // && code.email.toLowerCase().startsWith(searchFilter.toLowerCase())
-      ))
-    ))
-  ), [codes, lessonFilter, searchFilter, statusFilter]);
+  const filteredCodes = useMemo(
+    () =>
+      codes.filter(
+        (code) =>
+          (lessonFilter === 'ALL' || lessonFilter === code.lessonId) &&
+          statusFilter[CODE_STATUS_CHECKBOXES.indexOf(code.status)] &&
+          (searchFilter === '' ||
+            code.code.startsWith(searchFilter.toUpperCase()))
+            // && code.email.toLowerCase().startsWith(searchFilter.toLowerCase())
+      ),
+    [codes, lessonFilter, searchFilter, statusFilter]
+  );
 
   return (
     <Container className='codes-container'>
       <Row>
         <Col>
-          <h2>Codes { !isLoading ? `(${codes.length})` : '' }</h2>
+          <h2>Codes {!isLoading ? `(${codes.length})` : ''}</h2>
         </Col>
         <Col>
-          <Button style={{float: 'right'}} onClick={toggleModal}>+ Generate New Codes</Button>
-          <Button theme='light' style={{float: 'right', marginRight: '10px'}} onClick={getLessons}>Refresh</Button>
+          <Button style={{ float: 'right' }} onClick={toggleModal}>
+            + Generate New Codes
+          </Button>
+          <Button
+            theme='light'
+            style={{ float: 'right', marginRight: '10px' }}
+            onClick={getLessons}>
+            Refresh
+          </Button>
         </Col>
       </Row>
       <Row>
@@ -97,11 +114,13 @@ const Codes = () => {
           <Form>
             <FormGroup>
               <label htmlFor='filterLesson'>Lesson</label>
-              <FormSelect id='filterLesson' onChange={e => setLessonFilter(e.target.value)}>
+              <FormSelect id='filterLesson' onChange={(e) => setLessonFilter(e.target.value)}>
                 <option value='ALL'>All Lessons</option>
-                { Object.keys(lessonTitles).map((lessonId) => (
-                <option value={lessonId} key={lessonId}>{lessonTitles[lessonId]}</option>
-                )) }
+                {Object.keys(lessonTitles).map((lessonId) => (
+                  <option value={lessonId} key={lessonId}>
+                    {lessonTitles[lessonId]}
+                  </option>
+                ))}
               </FormSelect>
             </FormGroup>
           </Form>
@@ -110,11 +129,14 @@ const Codes = () => {
           <Form>
             <label htmlFor='filterStatus'>Status</label>
             <FormGroup id='filterStatus' className='inline-checkboxes'>
-              {
-                CODE_STATUS_CHECKBOXES.map((status, idx) => (
-                  <FormCheckbox checked={statusFilter[idx]} onChange={e => toggleStatusFilter(idx)} key={status}>{CODE_STATUS_VALUES[status][0]}</FormCheckbox>
-                ))
-              }
+              {CODE_STATUS_CHECKBOXES.map((status, idx) => (
+                <FormCheckbox
+                  checked={statusFilter[idx]}
+                  onChange={(e) => toggleStatusFilter(idx)}
+                  key={status}>
+                  {CODE_STATUS_VALUES[status][0]}
+                </FormCheckbox>
+              ))}
             </FormGroup>
           </Form>
         </Col>
@@ -122,7 +144,11 @@ const Codes = () => {
           <Form>
             <FormGroup>
               <label htmlFor='filterSearch'>Search</label>
-              <FormInput id='filterSearch' placeholder='Enter a code or email...' value={searchFilter} onChange={e => setSearchFilter(e.target.value)}></FormInput>
+              <FormInput
+                id='filterSearch'
+                placeholder='Enter a code or email...'
+                value={searchFilter}
+                onChange={(e) => setSearchFilter(e.target.value)}></FormInput>
             </FormGroup>
           </Form>
         </Col>
@@ -140,10 +166,11 @@ const Codes = () => {
               </tr>
             </thead>
             <tbody>
-              { isLoading ? (
-                <tr>
-                  <td colSpan='5'>Loading</td>
-                </tr>
+              {isLoading ? (
+                <>
+                  <br></br>
+                  <Spinner />
+                </>
               ) : (
                 filteredCodes.map((code) => (
                   <tr key={code.code}>
@@ -151,17 +178,18 @@ const Codes = () => {
                       <ClickToCopy id={`copy-code-${code.code}`}>{code.code}</ClickToCopy>
                     </td>
                     <td>{code.lesson}</td>
-                    <td className={CODE_STATUS_VALUES[code.status][1]}>{CODE_STATUS_VALUES[code.status][0]}</td>
+                    <td className={CODE_STATUS_VALUES[code.status][1]}>
+                      {CODE_STATUS_VALUES[code.status][0]}
+                    </td>
                     <td>
-                      { code.status === 'INACTIVE' ?
-                      `${moment.duration(code.ttl, 'seconds').humanize()} after activation`
-                      :
-                      moment(code.expirationDate).format('MM/DD/YYYY hh:mm A') }
+                      {code.status === 'INACTIVE'
+                        ? `${moment.duration(code.ttl, 'seconds').humanize()} after activation`
+                        : moment(code.expirationDate).format('MM/DD/YYYY hh:mm A')}
                     </td>
                     <td>random@gmail.com</td>
                   </tr>
                 ))
-              ) }
+              )}
             </tbody>
           </table>
         </Col>
