@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardImg, CardBody, CardTitle, Button } from 'shards-react';
+import { Card, CardBody, CardTitle, Button } from 'shards-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { faKey } from '@fortawesome/free-solid-svg-icons';
+import VideoPlayer from 'common/VideoPlayer';
 import { useHistory } from 'react-router-dom';
 import './lessonModule.css';
 
-const LessonModule = ({ id, title, thumbnailUrl }) => {
+const LessonModule = ({ id, title, videoUrl}) => {
   const history = useHistory();
 
   const redirectToEdit = (id) => {
@@ -19,8 +20,11 @@ const LessonModule = ({ id, title, thumbnailUrl }) => {
   };
 
   return (
-    <Card className='lessonModule'>
-      <CardImg className='thumbnail' top src={thumbnailUrl}></CardImg>
+    <Card className="lessonModule">
+      <VideoPlayer
+        src={videoUrl}
+        controls={false}
+      ></VideoPlayer>
       <CardBody>
         <CardTitle className='lesson-videoTitle' title={title}>
           {title}
@@ -44,7 +48,7 @@ const LessonModule = ({ id, title, thumbnailUrl }) => {
 
 LessonModule.propTypes = {
   title: PropTypes.string.isRequired,
-  thumbnailURL: PropTypes.string.isRequired,
+  videoUrl: PropTypes.string.isRequired,
 };
 
 export default LessonModule;

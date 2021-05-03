@@ -11,6 +11,10 @@
     height: 200px;
 }
 
+.lessonModule .video-js {
+    margin: 0;
+}
+
 .lesson-videoTitle {
     white-space: nowrap;
     overflow: hidden;

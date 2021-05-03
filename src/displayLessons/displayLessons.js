@@ -41,7 +41,7 @@ const DisplayLessons = () => {
           key={lesson.lessonId}
           id={lesson.lessonId}
           title={lesson.title}
-          thumbnailUrl={lesson.thumbnailUrl}
+          videoUrl={lesson.videoUrl}
           className='lessonCard'
         />
       )),
