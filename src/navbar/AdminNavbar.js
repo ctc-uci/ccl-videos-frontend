@@ -9,12 +9,12 @@ function AppNavbar() {
       <NavbarBrand href='/'>
         <img className="nav-brand" src={brand} alt='CCL' />
       </NavbarBrand>
-      <Nav navbar className='m-auto nav-links'>
+      <Nav navbar className='ml-auto nav-links' >
         <NavItem>
-          <NavLink href='/lessons'>Lessons</NavLink>
+          <NavLink className='m-3 nav-link' active href='/lessons'>Lessons</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href='/codes'>Codes</NavLink>
+          <NavLink className='m-3 nav-link' active href='/codes'>Codes</NavLink>
         </NavItem>
       </Nav>
     </Navbar>
