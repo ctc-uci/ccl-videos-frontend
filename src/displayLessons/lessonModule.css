@@ -40,10 +40,6 @@
   margin: 10px;
 }
 
-.lesson-icon {
-  margin-right: 5px;
-}
-
 @media only screen and (max-width: 1000px) {
   .lesson-module-container {
     width: 47%;

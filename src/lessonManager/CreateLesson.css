@@ -30,20 +30,17 @@
   height: 100%;
 }
 
-.bottom {
+.create-lesson-container {
+  margin-bottom: 60px;
+}
+
+.create-lesson-button-group {
   display: flex;
-  margin-top: 4em;
-  margin-bottom: 4em;
+  justify-content: center;
 }
 
-.delete {
-  flex-basis: 50%;
-}
-
-.button-group {
-  display: inherit;
-  justify-content: space-between;
-  flex-basis: 30%;
+.create-lesson-button-group button {
+  margin: 0 20px;
 }
 
 .title-section {
