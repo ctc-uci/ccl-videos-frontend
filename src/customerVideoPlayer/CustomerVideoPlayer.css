@@ -1,22 +1,100 @@
-.video-js {
-  max-width: 50vw;
-  margin: 0 auto;
-  margin-top: 25px;
-  margin-bottom: 20px;
+.description-container {
+  word-wrap: break-word;
 }
 
-.lesson-page {
-  display: flex;
-  flex-direction: column;
-  width: 75%;
-  margin: 0 auto;
-}
-
-.customer-video-text-container {
-  text-align: left;
+.video-title,
+.video-description,
+.customer-video-expiration-date {
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
 }
 
 .customer-video-expiration-date {
-  color: red;
-  margin-bottom: 5px;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: left;
+  color: #c4183c;
+  margin-bottom: 0.5em;
+}
+
+@media only screen and (max-width: 600px) {
+  .video-title {
+    font-weight: 500;
+    line-height: 36px;
+    font-size: 24px;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .video-description {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .customer-video-text-container {
+    position: initial;
+    text-align: left;
+    margin-top: 1em;
+    margin-bottom: 4em;
+    right: 0;
+  }
+
+  .lesson-page {
+    display: flex;
+    flex-direction: column;
+    max-width: 80vw;
+    margin: 0 auto;
+    margin-top: 4em;
+  }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 601px) {
+  .video-title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 60px;
+    display: flex;
+    align-items: center;
+  }
+
+  .video-description {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .lesson-page {
+    display: flex;
+    flex-direction: column;
+    max-width: 80vw;
+    margin: 0 auto;
+    margin-top: 4em;
+  }
+  .customer-video-expiration-date {
+    margin-top: 2em;
+  }
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 1025px) {
+  .customer-video-text-container {
+    position: relative;
+    text-align: left;
+    width: 65vw;
+    margin-top: 3em;
+    margin-bottom: 4em;
+    right: 5em;
+  }
+  .video-title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 60px;
+  }
+
+  .lesson-page {
+    display: flex;
+    flex-direction: column;
+    max-width: 50vw;
+    margin: 0 auto;
+    margin-top: 4em;
+  }
 }
