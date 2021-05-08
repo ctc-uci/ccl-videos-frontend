@@ -1,34 +1,35 @@
 import React from 'react';
 import FaqModule from './FaqModule';
-import './FaqSection.css'
+import './FaqSection.css';
 
-const question1 = "What is Albert's real name?"
-const answer1 = "Albert's real name is... Albert"
+const question1 = 'What are codes used for?';
+const answer1 = "Codes are used to unlock companion lessons for Child Creativity Lab's test kits.";
 
-const question2 = "How many licks does it take to get to the center of a tootsie pop"
-const answer2 = "idk, but more than 2...probably"
+const question2 = 'Where do I get a code?';
+const answer2 = 'Codes can be purchased from the official Child Creativity Lab website.';
 
-const question3 = "How are you doing today?"
-const answer3 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pellentesque massa id magna ullamcorper placerat. Nullam dictum maximus nisi, sed condimentum nisl euismod eu. Praesent nec nisi semper lectus malesuada eleifend."
+const question3 = 'How long does my code last for?';
+const answer3 =
+  'Codes will usually last 2 weeks before expiring. This is to ensure that our intellectual property remains secure.';
 
-const question4 = "I am just saying words here to see how the overflow looks okay cool is this enough words yet i honestly dont know, apparently not darn how do i get enough words smh"
-const answer4 = "cool"
+const question4 = 'Can I leave my lesson and come back to it later?';
+const answer4 =
+  'Yes. During a codes active period, you may re-enter it as many times as desired. However, after expiration, the code will no longer be able to be used.';
 
-const question5 = "Can i get a raise?"
-const answer5 = "no"
+const question5 = 'My code doesn’t work. What do I do?';
+const answer5 = 'Please contact us through phone or email using the information listed below.';
 
 const FaqSection = () => {
-    return (
-        <div className="faqSection">
-            <h1 className="title">Frequently Asked Questions</h1>
-            <FaqModule question={question1} answer={answer1} />
-            <FaqModule question={question2} answer={answer2} />
-            <FaqModule question={question3} answer={answer3} />
-            <FaqModule question={question4} answer={answer4} />
-            <FaqModule question={question5} answer={answer5} />
-        </div>
-    );
+  return (
+    <div className='faqSection'>
+      <h1 className='title'>Frequently Asked Questions</h1>
+      <FaqModule question={question1} answer={answer1} />
+      <FaqModule question={question2} answer={answer2} />
+      <FaqModule question={question3} answer={answer3} />
+      <FaqModule question={question4} answer={answer4} />
+      <FaqModule question={question5} answer={answer5} />
+    </div>
+  );
 };
-
 
 export default FaqSection;

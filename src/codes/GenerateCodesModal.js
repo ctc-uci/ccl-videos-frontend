@@ -19,7 +19,7 @@ import config from '../config';
 import { DURATION_UNITS } from '../consts';
 
 const GenerateCodesModal = (props) => {
-  const { open, toggle, lessonTitles } = props;
+  const { open, toggle, lessonTitles, onCodeGeneration } = props;
   console.log(props);
 
   // states for generate codes modal inputs
@@ -46,6 +46,7 @@ const GenerateCodesModal = (props) => {
     // }
     setGeneratedCodes(res.data['generatedCodes'].join(', '));
     setIsGenerating(false);
+    onCodeGeneration();
   };
 
   useEffect(() => {
@@ -65,7 +66,7 @@ const GenerateCodesModal = (props) => {
       <ModalHeader>Generate Codes</ModalHeader>
       <ModalBody>
         { !generatedCodes ? (
-          <Form>
+          <Form id="generateCodesFormContainer">
             <FormGroup>
               <label htmlFor='generateCodesLesson'>Lesson</label>
               <FormSelect id='generateCodesLesson' required onChange={e => setGenerateCodesLesson(e.target.value)}>

@@ -6,6 +6,10 @@ body.force-scrollbar {
     padding-top: 30px;
 }
 
+.codes-header {
+    margin-bottom: 15px;
+}
+
 .inline-checkboxes {
     display: flex;
     flex-wrap: wrap;
@@ -32,4 +36,8 @@ thead.sticky-header th {
 
 #generateCodesCount {
     width: 80px;
+}
+
+#generateCodesFormContainer {
+    text-align: left;
 }
