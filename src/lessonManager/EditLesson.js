@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { Form, FormInput, FormGroup, FormTextarea, Button } from 'shards-react';
-import { useHistory } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
-import { createAlert } from 'common/AlertBannerSlice';
-import config from 'config';
-import axios from 'axios';
-import VideoPlayer from 'common/VideoPlayer';
-import ConfirmModal from 'lessonManager/ConfirmModal';
-import VideoUploader from 'lessonManager/VideoUploader';
-import 'lessonManager/EditLesson.css';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Form, FormInput, FormGroup, FormTextarea, Button } from "shards-react";
+import { useHistory } from "react-router-dom";
+import { createAlert } from "common/AlertBannerSlice";
+import config from "config";
+import axios from "axios";
+import VideoPlayer from "common/VideoPlayer";
+import ConfirmModal from "lessonManager/ConfirmModal";
+import VideoUploader from "lessonManager/VideoUploader";
+import "lessonManager/EditLesson.css";
+import Previewer from "./Previewer";
 
 const EditLesson = () => {
   const [title, setTitle] = useState(null);
@@ -19,6 +18,7 @@ const EditLesson = () => {
   const [videoURL, setVideoURL] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [playerVisible, setPlayerVisible] = useState(true);
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -53,8 +53,8 @@ const EditLesson = () => {
   };
 
   const redirectToLessons = () => {
-    history.push('/lessons');
-  }
+    history.push("/lessons");
+  };
 
   const saveEdits = async (e) => {
     e.preventDefault();
@@ -66,58 +66,70 @@ const EditLesson = () => {
       });
       if (res.status === 200) {
         dispatch(
-          createAlert({ theme: 'success', message: `Lesson ${title} updated successfully.` })
+          createAlert({
+            theme: "success",
+            message: `Lesson ${title} updated successfully.`,
+          })
         );
       }
       redirectToLessons();
     } catch (err) {
-      dispatch(createAlert({ theme: 'danger', message: `Error: ${err}` }));
+      dispatch(createAlert({ theme: "danger", message: `Error: ${err}` }));
     }
   };
 
-  const preview = () => {
-    history.push(`/lessons/preview/${id}`)
-  }
+  const togglePreview = () => {
+    setIsPreviewMode(!isPreviewMode);
+  };
 
-  return (
+  return isPreviewMode ? (
+    <div className="whole-page">
+      <Previewer
+        title={title}
+        description={description}
+        videoUrl={videoURL}
+        closePreviewer={togglePreview}
+      ></Previewer>
+    </div>
+  ) : (
     <div>
-      <Form className='whole-page'>
-        <div className='header-section'>
-          <h1 className='lesson-title'>Edit Lesson</h1>
-          <Button onClick={preview}>
-            <FontAwesomeIcon icon={faExternalLinkAlt} className='external-link-alt' />
-            Preview Lesson
-          </Button>
+      <Form className="whole-page">
+        <div className="header-section">
+          <h1 className="lesson-title">Edit Lesson</h1>
+          <Button onClick={togglePreview}>Preview Lesson</Button>
         </div>
-        <div className='mid-section'>
-          <div className='mid-left'>
-            {playerVisible && videoURL? <VideoPlayer src={videoURL}></VideoPlayer> : null}
+        <div className="mid-section">
+          <div className="mid-left">
+            {playerVisible && videoURL ? (
+              <VideoPlayer src={videoURL}></VideoPlayer>
+            ) : null}
             <VideoUploader
               handleOnPrepare={hidePlayer}
               handleSubmit={renderPlayer}
-              handleSetVideoURL={handleSetVideoUrl}></VideoUploader>
+              handleSetVideoURL={handleSetVideoUrl}
+            ></VideoUploader>
           </div>
-          <div className='mid-right'>
+          <div className="mid-right">
             <FormGroup>
-              <div className='title-section'>
-                <label htmlFor='title'>Title</label>
+              <div className="title-section">
+                <label htmlFor="title">Title</label>
                 <FormInput
                   required
                   value={title}
-                  id='title'
-                  placeholder='Enter Title Here'
+                  id="title"
+                  placeholder="Enter Title Here"
                   onChange={(e) => {
                     setTitle(e.target.value);
                   }}
                 />
               </div>
-              <div className='description-sectio>'>
-                <label htmlFor='description'>Description</label>
+              <div className="description-sectio>">
+                <label htmlFor="description">Description</label>
                 <FormTextarea
                   required
                   value={description}
-                  id='description'
-                  placeholder='Enter Description Here'
+                  id="description"
+                  placeholder="Enter Description Here"
                   onChange={(e) => {
                     setDescription(e.target.value);
                   }}
@@ -126,26 +138,27 @@ const EditLesson = () => {
             </FormGroup>
           </div>
         </div>
-        <div className='bottom'>
-          <div className='delete'>
-            <Button id='deleter' theme='danger' onClick={onDelete}>
+        <div className="bottom">
+          <div className="delete">
+            <Button id="deleter" theme="danger" onClick={onDelete}>
               Delete Lesson
             </Button>
           </div>
-          <div className='button-group'>
+          <div className="button-group">
             <Button outline pill onClick={redirectToLessons}>
               Cancel
             </Button>
-            <Button pill id='submitter' type='Submit' onClick={saveEdits}>
+            <Button pill id="submitter" type="Submit" onClick={saveEdits}>
               Save Edits
             </Button>
           </div>
         </div>
         <ConfirmModal
           id={id}
-          extension={'mp4'}
+          extension={"mp4"}
           isOpen={showConfirmation}
-          toggler={setShowConfirmation}></ConfirmModal>
+          toggler={setShowConfirmation}
+        ></ConfirmModal>
       </Form>
     </div>
   );
