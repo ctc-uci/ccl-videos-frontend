@@ -98,7 +98,6 @@ const CodeUnlock = () => {
     }
   };
   
-  // TODO: Update code field to include inputted email
   const unlockLesson = async () => {
     try {
       const response = await axios.post(`${config.apiURL}/codes/${code}/redeem`);
@@ -113,6 +112,21 @@ const CodeUnlock = () => {
         setLessonVideoUrl(videoUrl);
         console.log('after state sets called')
       }
+    } catch (err) {
+      if (err.response.status && err.response.status === 401) {
+        displayDynamicErrorAlert(err.response.data.error);
+      } else {
+        displayGenericErrorAlert();
+      }
+    }
+  };
+
+  const sendUnlockLessonConfirmationEmail = async (email) => {
+    try {
+      await axios.post(
+        `${config.apiURL}/codes/${code}/notifyByEmail`,
+        { email: email }
+      );
     } catch (err) {
       if (err.response.status && err.response.status === 401) {
         displayDynamicErrorAlert(err.response.data.error);
@@ -140,9 +154,10 @@ const CodeUnlock = () => {
     setOpenModal(!openModal);
   };
 
-  const activationHandler = () => {
+  const activationHandler = async (email) => {
     toggleModal();
-    unlockLesson();
+    await unlockLesson();
+    await sendUnlockLessonConfirmationEmail(email);
   };
 
   return (
