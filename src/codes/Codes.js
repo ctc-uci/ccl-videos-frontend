@@ -52,9 +52,14 @@ const Codes = () => {
     setLessons(res.data);
     setIsLoading(false);
   };
+
   useEffect(() => {
     getLessons();
   }, []);
+
+  const onCodeGeneration = () => {
+    getLessons();
+  }
 
   // since we'll probably need a scrollbar just force it so the page doesn't jump when loading codes
   useEffect(() => {
@@ -94,19 +99,13 @@ const Codes = () => {
 
   return (
     <Container className='codes-container'>
-      <Row>
+      <Row className="codes-header">
         <Col>
           <h2>Codes {!isLoading ? `(${codes.length})` : ''}</h2>
         </Col>
         <Col>
           <Button style={{ float: 'right' }} onClick={toggleModal}>
             + Generate New Codes
-          </Button>
-          <Button
-            theme='light'
-            style={{ float: 'right', marginRight: '10px' }}
-            onClick={getLessons}>
-            Refresh
           </Button>
         </Col>
       </Row>
@@ -132,6 +131,7 @@ const Codes = () => {
             <FormGroup id='filterStatus' className='inline-checkboxes'>
               {CODE_STATUS_CHECKBOXES.map((status, idx) => (
                 <FormCheckbox
+                  
                   checked={statusFilter[idx]}
                   onChange={(e) => toggleStatusFilter(idx)}
                   key={status}>
@@ -195,7 +195,7 @@ const Codes = () => {
           </table>
         </Col>
       </Row>
-      <GenerateCodesModal open={isModalOpen} toggle={toggleModal} lessonTitles={lessonTitles} />
+      <GenerateCodesModal onCodeGeneration={onCodeGeneration} open={isModalOpen} toggle={toggleModal} lessonTitles={lessonTitles} />
     </Container>
   );
 };
