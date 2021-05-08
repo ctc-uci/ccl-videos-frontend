@@ -1,29 +1,32 @@
 .faq-module {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  box-shadow: none;
+  border: 1px solid #00b8d8 !important;
+  border-radius: 2px !important;
 }
 
 .question-button {
-    background-color: white;
+  background-color: white;
 }
 
 .button-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .question {
-    width: fit-content;
-    text-align: left;
+  width: fit-content;
+  text-align: left;
 }
 
 .arrow {
-    width: min-content;
+  width: min-content;
 }
 
 .answer {
-    background-color: lightgray;
-    padding: .75rem 1.25rem;
+  color: black;
+  padding: 0.75rem 1.25rem;
 }

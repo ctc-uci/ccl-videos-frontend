@@ -1,9 +1,9 @@
 .faqSection {
-    background-color: lightgray;
+    background-color: #E9ECEF;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding: 50px 100px;
+    padding: 125px 100px;
     width: 100%;
     height: max-content;
 }
