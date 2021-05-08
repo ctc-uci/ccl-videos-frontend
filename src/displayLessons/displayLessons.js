@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Button, CardColumns, Col, Container, Row } from 'shards-react';
+import { Button } from 'shards-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useHistory } from 'react-router-dom';
@@ -9,7 +9,6 @@ import axios from 'axios';
 import config from 'config';
 import 'displayLessons/displayLessons.css';
 
-// TODO: fix urls to come from config / cosntants
 const DisplayLessons = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [lessons, setLessons] = useState([]);
@@ -27,7 +26,6 @@ const DisplayLessons = () => {
     setIsLoading(false);
   };
 
-  // TODO: this code block could definitely be cleaned up. Looks super messy
   useEffect(() => {
     if (lessons.length === 0) {
       getLessons();
@@ -49,30 +47,18 @@ const DisplayLessons = () => {
   );
 
   return (
-    <Container>
-      <Row className='lessons-header'>
-        <Col>
-          <h1>Lessons</h1>
-        </Col>
-        <Col>
-          <Button onClick={redirectToCreate}>
-            <FontAwesomeIcon icon={faPlus} className='plus' />
-            Create New Lesson
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <div className='lessons'>
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <CardColumns className='lessons-card-columns'>{lessonList}</CardColumns>
-            )}
-          </div>
-        </Col>
-      </Row>
-    </Container>
+    <div className="lessons-container">
+      <div className='lessons-header'>
+        <h1>Lessons</h1>
+        <Button onClick={redirectToCreate}>
+          <FontAwesomeIcon icon={faPlus} className='plus' />
+          Create New Lesson
+        </Button>
+      </div>
+      <div className='lessons'>
+        {isLoading ? <Spinner /> : <div className='lessons-card-columns'>{lessonList}</div>}
+      </div>
+    </div>
   );
 };
 
