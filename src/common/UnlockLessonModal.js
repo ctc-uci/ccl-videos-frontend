@@ -38,7 +38,7 @@ const UnlockLessonModal = ({ lessonTitle, expirationDate, open, toggle, activati
             <FormInput placeholder='Email Address' value={email} onChange={handleInputChange} />
           </div>
           <div className='modal-button'>
-            <Button theme='success' onClick={activationHandler} disabled={!email}>
+            <Button theme='success' onClick={() => activationHandler(email)} disabled={!email}>
               Activate Now
             </Button>
           </div>
