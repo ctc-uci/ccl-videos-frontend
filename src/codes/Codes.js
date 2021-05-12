@@ -90,9 +90,9 @@ const Codes = () => {
         (code) =>
           (lessonFilter === 'ALL' || lessonFilter === code.lessonId) &&
           statusFilter[CODE_STATUS_CHECKBOXES.indexOf(code.status)] &&
-          (searchFilter === '' ||
-            code.code.startsWith(searchFilter.toUpperCase()))
-            // && code.email.toLowerCase().startsWith(searchFilter.toLowerCase())
+          (searchFilter === ''
+            || code.code.startsWith(searchFilter.toUpperCase())
+            || (code.email && code.email.toLowerCase().includes(searchFilter.toLowerCase())))
       ),
     [codes, lessonFilter, searchFilter, statusFilter]
   );
@@ -187,7 +187,7 @@ const Codes = () => {
                         ? `${moment.duration(code.ttl, 'seconds').humanize()} after activation`
                         : moment(code.expirationDate).format('MM/DD/YYYY hh:mm A')}
                     </td>
-                    <td>random@gmail.com</td>
+                    <td>{code.email}</td>
                   </tr>
                 ))
               )}

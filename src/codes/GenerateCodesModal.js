@@ -20,7 +20,6 @@ import { DURATION_UNITS } from '../consts';
 
 const GenerateCodesModal = (props) => {
   const { open, toggle, lessonTitles, onCodeGeneration } = props;
-  console.log(props);
 
   // states for generate codes modal inputs
   const [generateCodesLesson, setGenerateCodesLesson] = useState();
@@ -32,7 +31,6 @@ const GenerateCodesModal = (props) => {
   const [copyButtonText, setCopyButtonText] = useState('Copy codes to clipboard');
   
   const generateCodes = async (lessonId, expiration, unit, count) => {
-    console.log(lessonId, expiration, unit, count);
     if (isGenerating) {
       return;
     }

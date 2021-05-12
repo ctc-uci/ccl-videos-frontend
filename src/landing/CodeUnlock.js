@@ -98,9 +98,10 @@ const CodeUnlock = () => {
     }
   };
   
-  const unlockLesson = async () => {
+  const unlockLesson = async (email) => {
     try {
-      const response = await axios.post(`${config.apiURL}/codes/${code}/redeem`);
+      const response = await axios.post(`${config.apiURL}/codes/${code}/redeem`,
+        { email: email });
       if (response.status === 200) {
         console.log(response);
         const { lesson, expirationDate } = response.data;
@@ -112,21 +113,6 @@ const CodeUnlock = () => {
         setLessonVideoUrl(videoUrl);
         console.log('after state sets called')
       }
-    } catch (err) {
-      if (err.response.status && err.response.status === 401) {
-        displayDynamicErrorAlert(err.response.data.error);
-      } else {
-        displayGenericErrorAlert();
-      }
-    }
-  };
-
-  const sendUnlockLessonConfirmationEmail = async (email) => {
-    try {
-      await axios.post(
-        `${config.apiURL}/codes/${code}/notifyByEmail`,
-        { email: email }
-      );
     } catch (err) {
       if (err.response.status && err.response.status === 401) {
         displayDynamicErrorAlert(err.response.data.error);
@@ -156,8 +142,7 @@ const CodeUnlock = () => {
 
   const activationHandler = async (email) => {
     toggleModal();
-    await unlockLesson();
-    await sendUnlockLessonConfirmationEmail(email);
+    await unlockLesson(email);
   };
 
   return (
