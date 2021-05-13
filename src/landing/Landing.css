@@ -57,7 +57,7 @@
 
 @media only screen and (max-width: 600px) {
   .landing-header-container {
-    flex-direction: column;
+    flex-direction: column-reverse;
     margin: 40px 0;
   }
 
