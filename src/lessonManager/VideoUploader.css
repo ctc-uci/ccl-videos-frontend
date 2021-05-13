@@ -1,70 +1,46 @@
-.dropzone-zone {
-  flex: 1;
+.dzu-inputLabel {
+  font-family: inherit;
+  font-weight: inherit;
+}
+
+.dropzone {
+  top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   width: 100%;
-  height: 100%;
-  border-width: 2px;
-  border-radius: 2px;
-  padding: 70px 0;
-  border-color: #00a3ff;
-  border-style: dashed;
+  min-height: 170px;
+  overflow: scroll;
+  margin: 0 auto;
+  position: relative;
   box-sizing: border-box;
-  background-color: #e5e5e5;
-  outline: none;
-  transition: border 0.24s ease-in-out;
+  transition: all 0.15s linear;
+  border: 2px solid #d9d9d9;
+  border-radius: 4px;
+  overflow: inherit;
+  border: 2px dashed #d6d6d6;
+  border-radius: 22px;
 }
 
-.dropzone-active {
-  border-color: #2196f3;
-}
-
-.dropzone-accept {
-  border-color: #00e676;
-}
-
-.dropzone-reject {
-  border-color: #ff1744;
+.dropzone-icon {
+  max-height: 75px;
+  max-width: 75px;
 }
 
 .dropzone-text {
-  color: black;
-  font-weight: 600;
+  line-height: 15px;
+}
+
+.dropzone-text-container {
+  text-align: center;
+}
+.dropzone-header {
+  padding-top: 10px;
   font-size: 16px;
-  margin-bottom: 1.3em;
+  font-weight: 600;
 }
 
-.icon {
-  height: 4em;
-  width: 4em;
-  margin-bottom: 0.3em;
-  margin-top: -1.25em;
-}
-
-.drop-container {
-  background-color: tan;
-}
-
-.hidden {
-  display: none;
-}
-
-#replacer {
-  margin-top: 1em;
-  width: 50%;
-  padding: 0.5em 0.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.sm-icon {
-  width: 15%;
-  height: auto;
-}
-
-.replace-text {
-  font-size: auto;
+.dropzone-subheader {
+  font-size: 14px;
+  font-weight: 400;
 }

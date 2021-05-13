@@ -3,6 +3,8 @@ import { apiURL, bucket } from 'config';
 import 'react-dropzone-uploader/dist/styles.css';
 import Dropzone from 'react-dropzone-uploader';
 import axios from 'axios';
+import uploadIcon from 'icons/upload-icon.png';
+import 'lessonManager/VideoUploader.css';
 
 const VideoUploader = ({ handleOnPrepare = null, handleSetVideoURL, handleSubmit }) => {
   const getUploadParams = async ({ file }) => {
@@ -40,18 +42,23 @@ const VideoUploader = ({ handleOnPrepare = null, handleSetVideoURL, handleSubmit
     }
   };
 
-  const dropzoneInputContent = () => {
-    return (
-      <div>
-        <p>Drop file to upload or,</p>
-        {/* <Button onClick={(e) => {e.preventDefault();}}>Select Video (mp4)</Button> */}
-      </div>
-    );
+  const dropzoneClasses = {
+    dropzone: 'dropzone',
+    dropzoneActive: 'file-hover',
   };
+
+  const dropzoneText = (
+    <div className="dropzone-text-container">
+      <img className="dropzone-icon" src={uploadIcon} alt="chatting" />
+      <h4 className="dropzone-text dropzone-header">Drag &amp; drop a video</h4>
+      <h6 className="dropzone-text dropzone-subheader">or click to upload</h6>
+    </div>
+  );
 
   return (
     <Dropzone
-      inputContent={dropzoneInputContent}
+    classNames={dropzoneClasses}
+    inputContent={dropzoneText}
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       maxFiles={1}
