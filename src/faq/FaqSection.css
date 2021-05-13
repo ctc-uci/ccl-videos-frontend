@@ -12,3 +12,12 @@
     font-size: large;
     text-align: left;
 }
+
+@media only screen and (max-width: 600px) {
+    .faqSection {
+        padding: 5px 15px;
+    }
+    .title {
+        text-align: center;
+    }
+  }

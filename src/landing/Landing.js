@@ -16,7 +16,7 @@ const Landing = () => {
             <h1 className='landing-header-input-text'>Enter your code to unlock a lesson!</h1>
             <CodeUnlock />
           </div>
-          <img src={landingImage} alt='' />
+          <img className="landing-image" src={landingImage} alt='' />
         </div>
       </section>
       <section className='faq'>

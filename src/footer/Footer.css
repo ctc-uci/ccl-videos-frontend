@@ -1,7 +1,7 @@
 .footer-container {
   background-color: #0067f4;
   padding: 40px 0;
-  height: 300px;
+  min-height: 300px;
 }
 
 .footer-container a {
@@ -11,6 +11,13 @@
 .footer-row {
   margin: 0 auto !important;
   max-width: 1200px;
+}
+
+.footer-icon-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 200px;
+  padding-bottom: 20px;
 }
 
 .footer-social-media-container {
@@ -25,7 +32,7 @@
 
 .footer-text-bold {
   color: white;
-  margin: 5px;
+  /* margin: 5px; */
   font-weight: bold;
   line-height: 1.5em;
   margin-top: 10px;
@@ -34,10 +41,10 @@
 
 .footer-text {
   color: white;
-  margin: 5px;
   line-height: 1.5em;
   font-weight: 300;
   font-family: Poppins;
+  word-break: break-word;
 }
 
 .footer-contact-container {
@@ -47,6 +54,7 @@
   padding-right: 80px;
   display: flex;
   align-items: right;
+  overflow: wrap;
 }
 
 @media only screen and (max-width: 900px) {

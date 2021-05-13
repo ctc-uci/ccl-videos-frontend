@@ -9,21 +9,23 @@ const Footer = () => {
   library.add(fab);
   return (
     <div className='footer-container'>
-      <Row className="footer-row">
+      <Row className='footer-row'>
         <Col className='footer-social-media-container' sm='12' md='4' lg='3'>
           <h2 className='footer-text-bold'>Child Creativity Lab</h2>
-          <a href='https://www.facebook.com/childcreativitylab/'>
-            <FontAwesomeIcon className='footer-text-bold' icon={['fab', 'facebook']} />
-          </a>
-          <a href='https://www.instagram.com/childcreativitylab/?hl=en'>
-            <FontAwesomeIcon className='footer-text-bold' icon={['fab', 'instagram']} />
-          </a>
-          <a href='https://www.youtube.com/user/Childcreativity/featured'>
-            <FontAwesomeIcon className='footer-text-bold' icon={['fab', 'youtube']} />
-          </a>
-          <a href='https://twitter.com/childcreativity?lang=en'>
-            <FontAwesomeIcon className='footer-text-bold' icon={['fab', 'twitter']} />
-          </a>
+          <div className='footer-icon-container'>
+            <a href='https://www.facebook.com/childcreativitylab/'>
+              <FontAwesomeIcon size='2x' className='footer-text-bold' icon={['fab', 'facebook']} />
+            </a>
+            <a href='https://www.instagram.com/childcreativitylab/?hl=en'>
+              <FontAwesomeIcon size='2x' className='footer-text-bold' icon={['fab', 'instagram']} />
+            </a>
+            <a href='https://www.youtube.com/user/Childcreativity/featured'>
+              <FontAwesomeIcon size='2x' className='footer-text-bold' icon={['fab', 'youtube']} />
+            </a>
+            <a href='https://twitter.com/childcreativity?lang=en'>
+              <FontAwesomeIcon size='2x' className='footer-text-bold' icon={['fab', 'twitter']} />
+            </a>
+          </div>
           <h2 className='footer-text'>&#169; 2021 Child Creativity Labs</h2>
         </Col>
         <Col className='footer-website-container' sm='12' md='4' lg='3'>
