@@ -90,7 +90,7 @@ const GenerateCodesModal = (props) => {
             </FormGroup>
             <FormGroup>
               <label htmlFor='generateCodesCount'>Number of Codes</label>
-              <FormInput id='generateCodesCount' value={generateCodesCount} type='number' onChange={e => setGenerateCodesCount(Math.min(Math.max(1, e.target.value), 5))}></FormInput>
+              <FormInput id='generateCodesCount' value={generateCodesCount} type='number' onChange={e => setGenerateCodesCount(Math.min(Math.max(1, e.target.value), 100))}></FormInput>
             </FormGroup>
             <Button
               type='submit'
