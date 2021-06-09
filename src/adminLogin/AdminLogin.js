@@ -1,16 +1,24 @@
 import React, { useState } from "react";
-import { Form, FormInput, FormGroup, Button } from "shards-react";
+import { Form, FormInput, FormGroup, Button, Modal, ModalHeader } from "shards-react";
 import { useHistory } from "react-router-dom";
+import { createAlert } from 'common/AlertBannerSlice';
+import { useDispatch } from 'react-redux';
+import ChangePassword from 'adminLogin/ChangePassword';
 import axios from "axios";
 import config from "config";
-import AuthService from "../authService/AuthService";
-import "./AdminLogin.css";
+import AuthService from "authService/AuthService";
+import "adminLogin/AdminLogin.css";
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [open, setOpen] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const toggle = () => {
+    setOpen(!open);
+  }
 
   const checkLoginCred = async () => {
     try {
@@ -27,7 +35,10 @@ const AdminLogin = () => {
         history.push("/lessons");
       }
     } catch (err) {
-      alert(err.response.data);
+      dispatch(createAlert({
+        message: err.response.data,
+        theme: 'danger',
+      }))
     }
   };
   return (
@@ -55,6 +66,13 @@ const AdminLogin = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </FormGroup>
+      <p className="change-credentials-link" onClick={toggle}>Change username and password</p>
+      <Modal open={open} toggle={toggle}>
+        <ModalHeader className="admin-login-modal-header">
+          Change username and password
+        </ModalHeader>
+        <ChangePassword toggleModal={toggle} />
+      </Modal>
       <Button type="submit" onClick={checkLoginCred}>
         Login
       </Button>

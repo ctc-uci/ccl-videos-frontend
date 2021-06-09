@@ -1,3 +1,13 @@
 .admin-login-form {
   padding: 20px;
 }
+
+.change-credentials-link {
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.change-credentials-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

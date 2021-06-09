@@ -17,6 +17,7 @@
 
 .landing-image {
   width: 50%;
+  max-height: 270px;
 }
 
 .landing-header-input {
@@ -67,5 +68,6 @@
 
   .landing-image {
     width: 100%;
+    height: 100%;
   }
 }

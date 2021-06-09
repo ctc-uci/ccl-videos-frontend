@@ -41,6 +41,9 @@ const Footer = () => {
           <a href='https://www.childcreativitylab.org/home'>
             <h2 className='footer-text-bold'>Website</h2>
           </a>
+          <a href='/login'>
+            <h2 className='footer-text-bold'>Administrator Portal</h2>
+          </a>
         </Col>
         <Col className='footer-contact-container' sm='12' md='4' lg='6'>
           <div>
