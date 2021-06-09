@@ -5,11 +5,13 @@ import React from 'react';
 import FAQ from 'faq/FaqSection';
 import landingImage from 'images/landing-image.png';
 import CodeUnlock from 'landing/CodeUnlock';
+import config from 'config';
 import 'landing/Landing.css';
 
 const Landing = () => {
   return (
     <div className='landing-container'>
+      <img src={`${config.apiURL}/`} alt="" />
       <section className='landing-header'>
         <div className='landing-header-container'>
           <div className='landing-header-input-container'>
