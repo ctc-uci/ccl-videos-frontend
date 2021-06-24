@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AdminRoute from 'adminRoute/AdminRoute';
 import AdminLogin from 'adminLogin/AdminLogin';
@@ -11,8 +11,18 @@ import Layout from 'common/Layout';
 import CreateLesson from 'lessonManager/CreateLesson';
 import EditLesson from 'lessonManager/EditLesson';
 import Previewer from 'lessonManager/Previewer';
+import config from 'config';
+import axios from 'axios';
 
 function App() {
+  // keep heroku awake on load for better UX
+  useEffect(() => {
+    const activateHeroku = async () => {
+      await axios.get(`${config.apiURL}/`)
+    }
+    activateHeroku();
+  }, []);
+
   return (
     <Router>
       <Switch>
