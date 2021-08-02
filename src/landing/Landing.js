@@ -23,7 +23,7 @@ const Landing = () => {
         <FAQ></FAQ>
       </section>
       <section className='about'>
-        <h1 className="landing-section-title">About CCL Lesson Unlocker</h1>
+        <h1 className="landing-section-title">About CCL STEAM Video Player</h1>
         <p>
           When you purchase a STEAM Challenge kit from Child Creativity Lab, it comes with a unique code.
           By entering that code on this website, you will have access to your STEAM video lesson!
