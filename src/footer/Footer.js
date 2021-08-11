@@ -26,7 +26,7 @@ const Footer = () => {
               <FontAwesomeIcon size='2x' className='footer-text-bold' icon={['fab', 'twitter']} />
             </a>
           </div>
-          <h2 className='footer-text'>&#169; 2021 Child Creativity Labs</h2>
+          <h2 className='footer-text'>&#169; 2021 Child Creativity Lab</h2>
         </Col>
         <Col className='footer-website-container' sm='12' md='4' lg='3'>
           <a href='https://www.childcreativitylab.org/checkout/donate?donatePageId=5b1612e8352f539abbc6378f'>
@@ -49,8 +49,8 @@ const Footer = () => {
           <div>
             <h2 className='footer-text'>1901 Carnegie Ave. Suite 1A</h2>
             <h2 className='footer-text'>Santa Ana, CA 92705</h2>
-            <h2 className='footer-text'>(714) 352-4380</h2>
-            <h2 className='footer-text'>info@childcreativitylab.org</h2>
+            {/* <h2 className='footer-text'>(714) 352-4380</h2> */}
+            <h2 className='footer-text'>help@childcreativitylab.org</h2>
           </div>
         </Col>
       </Row>
